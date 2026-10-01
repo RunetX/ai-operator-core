@@ -28,7 +28,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $forkUrl = 'https://github.com/ui99ru/web-transport-addin.git'
-$forkCommit = '6487f51596bd010c2a0d5c0ee9522befa9ba3c0c'
+$forkCommit = '44205241f10a9ab06cd7e90e3bd6fb86503a9064'
 
 $buildInfo = Join-Path $Out 'BUILD.txt'
 if ($IfChanged -and (Test-Path (Join-Path $Out 'WebTransportAddIn.zip')) -and (Test-Path $buildInfo)) {
