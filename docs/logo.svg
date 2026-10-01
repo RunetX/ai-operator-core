@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <title>ИИ-оператор для 1С</title>
+  <!-- Основа -->
+  <rect x="8" y="8" width="240" height="240" rx="56" fill="#22305E"/>
+  <!-- Реплика в диалоге с агентом -->
+  <path d="M84 44 H172 A44 44 0 0 1 216 88 V128 A44 44 0 0 1 172 172 H118 L76 206 L82 172 A44 44 0 0 1 40 128 V88 A44 44 0 0 1 84 44 Z" fill="#FFC53D"/>
+  <!-- Искра ИИ -->
+  <path d="M120 70 Q124 104 156 108 Q124 112 120 146 Q116 112 84 108 Q116 104 120 70 Z" fill="#22305E"/>
+  <path d="M168 66 Q170 80 182 82 Q170 84 168 98 Q166 84 154 82 Q166 80 168 66 Z" fill="#22305E"/>
+  <!-- Подтверждение человеком -->
+  <circle cx="190" cy="190" r="40" fill="#22305E"/>
+  <circle cx="190" cy="190" r="31" fill="#2FB36F"/>
+  <path d="M175 190 L186 201 L206 180" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

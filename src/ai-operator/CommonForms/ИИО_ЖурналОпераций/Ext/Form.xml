@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Журнал операций ИИ-оператора</v8:content>
+		</v8:item>
+	</Title>
+	<Width>120</Width>
+	<AutoTitle>false</AutoTitle>
+	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1">
+		<Autofill>false</Autofill>
+		<ChildItems>
+			<Button name="ФормаОбновить" id="1">
+				<Type>CommandBarButton</Type>
+				<DefaultButton>true</DefaultButton>
+				<CommandName>Form.Command.Обновить</CommandName>
+				<ExtendedTooltip name="ФормаОбновитьРасширеннаяПодсказка" id="2"/>
+			</Button>
+			<Button name="ФормаОткатитьПакет" id="3">
+				<Type>CommandBarButton</Type>
+				<CommandName>Form.Command.ОткатитьПакет</CommandName>
+				<ExtendedTooltip name="ФормаОткатитьПакетРасширеннаяПодсказка" id="4"/>
+			</Button>
+		</ChildItems>
+	</AutoCommandBar>
+	<Events>
+		<Event name="OnCreateAtServer">ПриСозданииНаСервере</Event>
+	</Events>
+	<ChildItems>
+		<UsualGroup name="ГруппаОтбор" id="5">
+			<Group>AlwaysHorizontal</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="ГруппаОтборРасширеннаяПодсказка" id="6"/>
+			<ChildItems>
+				<InputField name="Период" id="7">
+					<DataPath>Период</DataPath>
+					<Width>25</Width>
+					<ContextMenu name="ПериодКонтекстноеМеню" id="8"/>
+					<ExtendedTooltip name="ПериодРасширеннаяПодсказка" id="9"/>
+					<Events>
+						<Event name="OnChange">ПериодПриИзменении</Event>
+					</Events>
+				</InputField>
+				<CheckBoxField name="ВсеПользователи" id="10">
+					<DataPath>ВсеПользователи</DataPath>
+					<TitleLocation>Right</TitleLocation>
+					<ContextMenu name="ВсеПользователиКонтекстноеМеню" id="11"/>
+					<ExtendedTooltip name="ВсеПользователиРасширеннаяПодсказка" id="12"/>
+					<Events>
+						<Event name="OnChange">ВсеПользователиПриИзменении</Event>
+					</Events>
+				</CheckBoxField>
+			</ChildItems>
+		</UsualGroup>
+		<Table name="Пакеты" id="13">
+			<Representation>List</Representation>
+			<CommandBarLocation>None</CommandBarLocation>
+			<ReadOnly>true</ReadOnly>
+			<HeightInTableRows>10</HeightInTableRows>
+			<DataPath>Пакеты</DataPath>
+			<SearchStringLocation>None</SearchStringLocation>
+			<ViewStatusLocation>None</ViewStatusLocation>
+			<SearchControlLocation>None</SearchControlLocation>
+			<RowFilter xsi:nil="true"/>
+			<ContextMenu name="ПакетыКонтекстноеМеню" id="14"/>
+			<AutoCommandBar name="ПакетыКоманднаяПанель" id="15"/>
+			<ExtendedTooltip name="ПакетыРасширеннаяПодсказка" id="16"/>
+			<SearchStringAddition name="ПакетыСтрокаПоиска" id="17">
+				<AdditionSource>
+					<Item>Пакеты</Item>
+					<Type>SearchStringRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ПакетыСтрокаПоискаКонтекстноеМеню" id="18"/>
+				<ExtendedTooltip name="ПакетыСтрокаПоискаРасширеннаяПодсказка" id="19"/>
+			</SearchStringAddition>
+			<ViewStatusAddition name="ПакетыСостояниеПросмотра" id="20">
+				<AdditionSource>
+					<Item>Пакеты</Item>
+					<Type>ViewStatusRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ПакетыСостояниеПросмотраКонтекстноеМеню" id="21"/>
+				<ExtendedTooltip name="ПакетыСостояниеПросмотраРасширеннаяПодсказка" id="22"/>
+			</ViewStatusAddition>
+			<SearchControlAddition name="ПакетыУправлениеПоиском" id="23">
+				<AdditionSource>
+					<Item>Пакеты</Item>
+					<Type>SearchControl</Type>
+				</AdditionSource>
+				<ContextMenu name="ПакетыУправлениеПоискомКонтекстноеМеню" id="24"/>
+				<ExtendedTooltip name="ПакетыУправлениеПоискомРасширеннаяПодсказка" id="25"/>
+			</SearchControlAddition>
+			<Events>
+				<Event name="OnActivateRow">ПакетыПриАктивизацииСтроки</Event>
+			</Events>
+			<ChildItems>
+				<InputField name="ПакетыДата" id="26">
+					<DataPath>Пакеты.Дата</DataPath>
+					<Width>16</Width>
+					<ContextMenu name="ПакетыДатаКонтекстноеМеню" id="27"/>
+					<ExtendedTooltip name="ПакетыДатаРасширеннаяПодсказка" id="28"/>
+				</InputField>
+				<InputField name="ПакетыПользователь" id="29">
+					<DataPath>Пакеты.Пользователь</DataPath>
+					<Width>20</Width>
+					<ContextMenu name="ПакетыПользовательКонтекстноеМеню" id="30"/>
+					<ExtendedTooltip name="ПакетыПользовательРасширеннаяПодсказка" id="31"/>
+				</InputField>
+				<InputField name="ПакетыДействие" id="32">
+					<DataPath>Пакеты.Действие</DataPath>
+					<Width>18</Width>
+					<ContextMenu name="ПакетыДействиеКонтекстноеМеню" id="33"/>
+					<ExtendedTooltip name="ПакетыДействиеРасширеннаяПодсказка" id="34"/>
+				</InputField>
+				<InputField name="ПакетыОбъектов" id="35">
+					<DataPath>Пакеты.Объектов</DataPath>
+					<Width>8</Width>
+					<ContextMenu name="ПакетыОбъектовКонтекстноеМеню" id="36"/>
+					<ExtendedTooltip name="ПакетыОбъектовРасширеннаяПодсказка" id="37"/>
+				</InputField>
+				<InputField name="ПакетыВыполнено" id="38">
+					<DataPath>Пакеты.Выполнено</DataPath>
+					<Width>8</Width>
+					<ContextMenu name="ПакетыВыполненоКонтекстноеМеню" id="39"/>
+					<ExtendedTooltip name="ПакетыВыполненоРасширеннаяПодсказка" id="40"/>
+				</InputField>
+				<InputField name="ПакетыОшибок" id="41">
+					<DataPath>Пакеты.Ошибок</DataPath>
+					<Width>8</Width>
+					<ContextMenu name="ПакетыОшибокКонтекстноеМеню" id="42"/>
+					<ExtendedTooltip name="ПакетыОшибокРасширеннаяПодсказка" id="43"/>
+				</InputField>
+				<InputField name="ПакетыПропущено" id="44">
+					<DataPath>Пакеты.Пропущено</DataPath>
+					<Width>8</Width>
+					<ContextMenu name="ПакетыПропущеноКонтекстноеМеню" id="45"/>
+					<ExtendedTooltip name="ПакетыПропущеноРасширеннаяПодсказка" id="46"/>
+				</InputField>
+				<InputField name="ПакетыСостояние" id="47">
+					<DataPath>Пакеты.Состояние</DataPath>
+					<Width>12</Width>
+					<ContextMenu name="ПакетыСостояниеКонтекстноеМеню" id="48"/>
+					<ExtendedTooltip name="ПакетыСостояниеРасширеннаяПодсказка" id="49"/>
+				</InputField>
+				<InputField name="ПакетыИсточник" id="50">
+					<DataPath>Пакеты.Источник</DataPath>
+					<Width>12</Width>
+					<ContextMenu name="ПакетыИсточникКонтекстноеМеню" id="51"/>
+					<ExtendedTooltip name="ПакетыИсточникРасширеннаяПодсказка" id="52"/>
+				</InputField>
+				<InputField name="ПакетыПакет" id="53">
+					<DataPath>Пакеты.Пакет</DataPath>
+					<Width>20</Width>
+					<ContextMenu name="ПакетыПакетКонтекстноеМеню" id="54"/>
+					<ExtendedTooltip name="ПакетыПакетРасширеннаяПодсказка" id="55"/>
+				</InputField>
+			</ChildItems>
+		</Table>
+		<LabelDecoration name="ЗаголовокОбъектов" id="56">
+			<Title formatted="false">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Объекты выбранного пакета</v8:content>
+				</v8:item>
+			</Title>
+			<ContextMenu name="ЗаголовокОбъектовКонтекстноеМеню" id="57"/>
+			<ExtendedTooltip name="ЗаголовокОбъектовРасширеннаяПодсказка" id="58"/>
+		</LabelDecoration>
+		<Table name="ОбъектыПакета" id="59">
+			<Representation>List</Representation>
+			<CommandBarLocation>None</CommandBarLocation>
+			<ReadOnly>true</ReadOnly>
+			<HeightInTableRows>8</HeightInTableRows>
+			<DataPath>ОбъектыПакета</DataPath>
+			<SearchStringLocation>None</SearchStringLocation>
+			<ViewStatusLocation>None</ViewStatusLocation>
+			<SearchControlLocation>None</SearchControlLocation>
+			<RowFilter xsi:nil="true"/>
+			<ContextMenu name="ОбъектыПакетаКонтекстноеМеню" id="60"/>
+			<AutoCommandBar name="ОбъектыПакетаКоманднаяПанель" id="61"/>
+			<ExtendedTooltip name="ОбъектыПакетаРасширеннаяПодсказка" id="62"/>
+			<SearchStringAddition name="ОбъектыПакетаСтрокаПоиска" id="63">
+				<AdditionSource>
+					<Item>ОбъектыПакета</Item>
+					<Type>SearchStringRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ОбъектыПакетаСтрокаПоискаКонтекстноеМеню" id="64"/>
+				<ExtendedTooltip name="ОбъектыПакетаСтрокаПоискаРасширеннаяПодсказка" id="65"/>
+			</SearchStringAddition>
+			<ViewStatusAddition name="ОбъектыПакетаСостояниеПросмотра" id="66">
+				<AdditionSource>
+					<Item>ОбъектыПакета</Item>
+					<Type>ViewStatusRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ОбъектыПакетаСостояниеПросмотраКонтекстноеМеню" id="67"/>
+				<ExtendedTooltip name="ОбъектыПакетаСостояниеПросмотраРасширеннаяПодсказка" id="68"/>
+			</ViewStatusAddition>
+			<SearchControlAddition name="ОбъектыПакетаУправлениеПоиском" id="69">
+				<AdditionSource>
+					<Item>ОбъектыПакета</Item>
+					<Type>SearchControl</Type>
+				</AdditionSource>
+				<ContextMenu name="ОбъектыПакетаУправлениеПоискомКонтекстноеМеню" id="70"/>
+				<ExtendedTooltip name="ОбъектыПакетаУправлениеПоискомРасширеннаяПодсказка" id="71"/>
+			</SearchControlAddition>
+			<Events>
+				<Event name="Selection">ОбъектыПакетаВыбор</Event>
+			</Events>
+			<ChildItems>
+				<InputField name="ОбъектыПакетаОбъект" id="72">
+					<DataPath>ОбъектыПакета.Объект</DataPath>
+					<Width>40</Width>
+					<ContextMenu name="ОбъектыПакетаОбъектКонтекстноеМеню" id="73"/>
+					<ExtendedTooltip name="ОбъектыПакетаОбъектРасширеннаяПодсказка" id="74"/>
+				</InputField>
+				<InputField name="ОбъектыПакетаДействие" id="75">
+					<DataPath>ОбъектыПакета.Действие</DataPath>
+					<Width>18</Width>
+					<ContextMenu name="ОбъектыПакетаДействиеКонтекстноеМеню" id="76"/>
+					<ExtendedTooltip name="ОбъектыПакетаДействиеРасширеннаяПодсказка" id="77"/>
+				</InputField>
+				<InputField name="ОбъектыПакетаРезультат" id="78">
+					<DataPath>ОбъектыПакета.Результат</DataPath>
+					<Width>10</Width>
+					<ContextMenu name="ОбъектыПакетаРезультатКонтекстноеМеню" id="79"/>
+					<ExtendedTooltip name="ОбъектыПакетаРезультатРасширеннаяПодсказка" id="80"/>
+				</InputField>
+				<InputField name="ОбъектыПакетаОшибка" id="81">
+					<DataPath>ОбъектыПакета.Ошибка</DataPath>
+					<Width>50</Width>
+					<ContextMenu name="ОбъектыПакетаОшибкаКонтекстноеМеню" id="82"/>
+					<ExtendedTooltip name="ОбъектыПакетаОшибкаРасширеннаяПодсказка" id="83"/>
+				</InputField>
+			</ChildItems>
+		</Table>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Пакеты" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Пакеты</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueTable</v8:Type>
+			</Type>
+			<Columns>
+				<Column name="Дата" id="1">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Дата</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:dateTime</v8:Type>
+						<v8:DateQualifiers>
+							<v8:DateFractions>DateTime</v8:DateFractions>
+						</v8:DateQualifiers>
+					</Type>
+				</Column>
+				<Column name="Пользователь" id="2">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Пользователь</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Действие" id="3">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Действие</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Объектов" id="4">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Объектов</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>10</v8:Digits>
+							<v8:FractionDigits>0</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Column>
+				<Column name="Выполнено" id="5">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Выполнено</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>10</v8:Digits>
+							<v8:FractionDigits>0</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Column>
+				<Column name="Ошибок" id="6">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>С ошибкой</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>10</v8:Digits>
+							<v8:FractionDigits>0</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Column>
+				<Column name="Пропущено" id="7">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Пропущено</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>10</v8:Digits>
+							<v8:FractionDigits>0</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Column>
+				<Column name="Состояние" id="8">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Состояние</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Источник" id="9">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Источник</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Пакет" id="10">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Пакет</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="МожноОткатить" id="11">
+					<Type>
+						<v8:Type>xs:boolean</v8:Type>
+					</Type>
+				</Column>
+			</Columns>
+		</Attribute>
+		<Attribute name="ОбъектыПакета" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Объекты пакета</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueTable</v8:Type>
+			</Type>
+			<Columns>
+				<Column name="Объект" id="1">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Объект</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:TypeSet>cfg:AnyIBRef</v8:TypeSet>
+					</Type>
+				</Column>
+				<Column name="Действие" id="2">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Действие</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Результат" id="3">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Результат</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Ошибка" id="4">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ошибка</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+			</Columns>
+		</Attribute>
+		<Attribute name="Период" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Период</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:StandardPeriod</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="ВсеПользователи" id="4">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Все пользователи</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:boolean</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="ТекущийПакет" id="5">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+	<Commands>
+		<Command name="Обновить" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Обновить</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Перечитать журнал за период</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>Обновить</Action>
+			<CurrentRowUse>DontUse</CurrentRowUse>
+		</Command>
+		<Command name="ОткатитьПакет" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Откатить пакет</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Вернуть объекты пакета в прежнее состояние через предпросмотр</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ОткатитьПакет</Action>
+			<CurrentRowUse>DontUse</CurrentRowUse>
+		</Command>
+	</Commands>
+</Form>

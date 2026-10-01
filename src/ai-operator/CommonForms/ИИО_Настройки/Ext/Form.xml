@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1"/>
+	<ChildItems>
+		<InputField name="ИИО_ПортMCP" id="1">
+			<DataPath>НаборКонстант.ИИО_ПортMCP</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Порт MCP-сервера</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Порт на 127.0.0.1. 0 — по умолчанию, 9874.</v8:content>
+				</v8:item>
+			</ToolTip>
+			<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+			<ContextMenu name="ИИО_ПортMCPКонтекстноеМеню" id="2"/>
+			<ExtendedTooltip name="ИИО_ПортMCPРасширеннаяПодсказка" id="3"/>
+		</InputField>
+		<InputField name="ИИО_ТаймаутСервераСек" id="4">
+			<DataPath>НаборКонстант.ИИО_ТаймаутСервераСек</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Таймаут ответа сервера, с</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сколько сервер ждёт ответ 1С на вызов инструмента. 0 — по умолчанию, 900.</v8:content>
+				</v8:item>
+			</ToolTip>
+			<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+			<ContextMenu name="ИИО_ТаймаутСервераСекКонтекстноеМеню" id="5"/>
+			<ExtendedTooltip name="ИИО_ТаймаутСервераСекРасширеннаяПодсказка" id="6"/>
+		</InputField>
+		<InputField name="ИИО_ТаймаутЗапросаСек" id="7">
+			<DataPath>НаборКонстант.ИИО_ТаймаутЗапросаСек</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Таймаут запроса, с</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сколько выполняется запрос модели до отмены. 0 — по умолчанию, 30.</v8:content>
+				</v8:item>
+			</ToolTip>
+			<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+			<ContextMenu name="ИИО_ТаймаутЗапросаСекКонтекстноеМеню" id="8"/>
+			<ExtendedTooltip name="ИИО_ТаймаутЗапросаСекРасширеннаяПодсказка" id="9"/>
+		</InputField>
+		<InputField name="ИИО_ЛимитСтрок" id="10">
+			<DataPath>НаборКонстант.ИИО_ЛимитСтрок</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Лимит строк в ответе</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сколько строк данных уходит модели за один ответ. 0 — по умолчанию, 200.</v8:content>
+				</v8:item>
+			</ToolTip>
+			<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+			<ContextMenu name="ИИО_ЛимитСтрокКонтекстноеМеню" id="11"/>
+			<ExtendedTooltip name="ИИО_ЛимитСтрокРасширеннаяПодсказка" id="12"/>
+		</InputField>
+		<InputField name="ИИО_СрокПредпросмотраСек" id="13">
+			<DataPath>НаборКонстант.ИИО_СрокПредпросмотраСек</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Срок ожидания подтверждения, с</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сколько форма предпросмотра ждёт решения пользователя. 0 — по умолчанию, 120.</v8:content>
+				</v8:item>
+			</ToolTip>
+			<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+			<ContextMenu name="ИИО_СрокПредпросмотраСекКонтекстноеМеню" id="14"/>
+			<ExtendedTooltip name="ИИО_СрокПредпросмотраСекРасширеннаяПодсказка" id="15"/>
+		</InputField>
+		<InputField name="ИИО_ОжиданиеОчередиСек" id="16">
+			<DataPath>НаборКонстант.ИИО_ОжиданиеОчередиСек</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ожидание очереди фоновых заданий, с</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сколько запрос модели ждёт старта фонового задания, пока база занята своими фоновыми заданиями. 0 — по умолчанию, 120.</v8:content>
+				</v8:item>
+			</ToolTip>
+			<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+			<ContextMenu name="ИИО_ОжиданиеОчередиСекКонтекстноеМеню" id="17"/>
+			<ExtendedTooltip name="ИИО_ОжиданиеОчередиСекРасширеннаяПодсказка" id="18"/>
+		</InputField>
+		<InputField name="ИИО_МаксДлинаЗапроса" id="19">
+			<DataPath>НаборКонстант.ИИО_МаксДлинаЗапроса</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Максимальная длина текста запроса, символов</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Более длинный запрос модели отклоняется. 0 — по умолчанию, 20000.</v8:content>
+				</v8:item>
+			</ToolTip>
+			<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+			<ContextMenu name="ИИО_МаксДлинаЗапросаКонтекстноеМеню" id="20"/>
+			<ExtendedTooltip name="ИИО_МаксДлинаЗапросаРасширеннаяПодсказка" id="21"/>
+		</InputField>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="НаборКонстант" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Набор констант</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>cfg:ConstantsSet</v8:Type>
+			</Type>
+			<MainAttribute>true</MainAttribute>
+			<UseAlways>
+				<Field>НаборКонстант.ИИО_ПортMCP</Field>
+				<Field>НаборКонстант.ИИО_ТаймаутСервераСек</Field>
+				<Field>НаборКонстант.ИИО_ТаймаутЗапросаСек</Field>
+				<Field>НаборКонстант.ИИО_ЛимитСтрок</Field>
+				<Field>НаборКонстант.ИИО_СрокПредпросмотраСек</Field>
+				<Field>НаборКонстант.ИИО_ОжиданиеОчередиСек</Field>
+				<Field>НаборКонстант.ИИО_МаксДлинаЗапроса</Field>
+			</UseAlways>
+		</Attribute>
+	</Attributes>
+</Form>
