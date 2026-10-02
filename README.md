@@ -12,6 +12,8 @@
 
 О проекте на Инфостарте: [ИИ-оператор для 1С: нейросеть проводит документы, но кнопку «Выполнить» нажимаете вы](https://infostart.ru/1c/articles/2800981/).
 
+Про надстройку для кадрового ЭДО: [ИИ-оператор управляет КЭДО](https://infostart.ru/1c/articles/2806328/), код — [RunetX/ai-operator-kedo](https://github.com/RunetX/ai-operator-kedo).
+
 ---
 
 ## Содержание
