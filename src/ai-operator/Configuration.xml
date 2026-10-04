@@ -50,7 +50,7 @@
 				<xr:Item xsi:type="xr:MDObjectRef">Role.ИИО_ПолныеПрава</xr:Item>
 			</DefaultRoles>
 			<Vendor>RunetX</Vendor>
-			<Version>0.1.10.0</Version>
+			<Version>0.1.11.1</Version>
 			<BriefInformation>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -87,19 +87,27 @@
 			<Subsystem>ИИО_Мсп_Провайдеры</Subsystem>
 			<CommonModule>ИИО_ПровайдерMCPКлиент</CommonModule>
 			<CommonTemplate>ИИО_ОписанияИнструментов</CommonTemplate>
+			<CommonModule>ИИО_ИнструментыКлиентСервер</CommonModule>
 			<CommonModule>ИИО_ОтветКлиентСервер</CommonModule>
+			<CommonModule>ИИО_РеестрИнструментов</CommonModule>
 			<CommonModule>ИИО_РеестрИнструментовКлиент</CommonModule>
 			<CommonModule>ИИО_РеестрИнструментовВызовСервера</CommonModule>
 			<CommonModule>ИИО_ЖурналВызовСервера</CommonModule>
+			<CommonModule>ИИО_ИнструментыБота</CommonModule>
 			<CommonModule>ИИО_ИнструментыКлиент</CommonModule>
 			<CommonModule>ИИО_МетаданныеКлиентСервер</CommonModule>
 			<CommonModule>ИИО_МетаданныеВызовСервера</CommonModule>
 			<CommonModule>ИИО_Метаданные</CommonModule>
 			<CommonTemplate>ИИО_ПреднастройкаМаскирования</CommonTemplate>
+			<CommonTemplate>ИИО_ИменаЛюдей</CommonTemplate>
+			<CommonTemplate>ИИО_НазванияМест</CommonTemplate>
+			<CommonTemplate>ИИО_ОписанияАгента</CommonTemplate>
 			<CommonModule>ИИО_МаскированиеПовтИсп</CommonModule>
 			<CommonModule>ИИО_Маскирование</CommonModule>
 			<CommonModule>ИИО_Пакеты</CommonModule>
 			<CommonModule>ИИО_МаскированиеКлиент</CommonModule>
+			<CommonModule>ИИО_МаскированиеКлиентСервер</CommonModule>
+			<CommonModule>ИИО_МаскированиеВвода</CommonModule>
 			<CommonModule>ИИО_Ответ</CommonModule>
 			<CommonModule>ИИО_СведенияВызовСервера</CommonModule>
 			<CommonModule>ИИО_ЗапросыВызовСервера</CommonModule>
@@ -137,6 +145,14 @@
 			<Constant>ИИО_ТаймаутЗапросаСек</Constant>
 			<Constant>ИИО_ЛимитСтрок</Constant>
 			<Constant>ИИО_СрокПредпросмотраСек</Constant>
+			<Constant>ИИО_СрокХраненияДиалоговЧас</Constant>
+			<Constant>ИИО_АдресМодели</Constant>
+			<Constant>ИИО_ИмяМодели</Constant>
+			<Constant>ИИО_ТаймаутМоделиСек</Constant>
+			<Constant>ИИО_ШагиАгента</Constant>
+			<Constant>ИИО_ДлинаИстории</Constant>
+			<Constant>ИИО_АдресМоделиМаскирования</Constant>
+			<Constant>ИИО_ИмяМоделиМаскирования</Constant>
 			<Constant>ИИО_ОжиданиеОчередиСек</Constant>
 			<Constant>ИИО_МаксДлинаЗапроса</Constant>
 			<CommonModule>ИИО_СерверMCPКлиент</CommonModule>
@@ -147,8 +163,13 @@
 			<Catalog>Пользователи</Catalog>
 			<Catalog>ГруппыПользователей</Catalog>
 			<InformationRegister>ИИО_РазрешенияДействий</InformationRegister>
+			<InformationRegister>ИИО_СловаМаскирования</InformationRegister>
 			<InformationRegister>ИИО_ДанныеОтката</InformationRegister>
+			<InformationRegister>ИИО_Диалоги</InformationRegister>
 			<Constant>ИИО_ЛимитОбъектовДействия</Constant>
+			<CommonModule>ИИО_Диалоги</CommonModule>
+			<CommonModule>ИИО_МодельHTTP</CommonModule>
+			<CommonModule>ИИО_Агент</CommonModule>
 			<CommonModule>ИИО_Журнал</CommonModule>
 			<CommonModule>ИИО_Права</CommonModule>
 			<CommonModule>ИИО_Действия</CommonModule>

@@ -10,12 +10,17 @@
   Расширение заимствует справочники «Пользователи» и «Группы пользователей». Их идентификаторы в разных
   конфигурациях разные, поэтому скрипт выгружает эти два объекта из базы и подставляет их идентификаторы.
 
-  С -Tests загружает ещё расширение тестов «ИИОператор_Тесты» (нужен YAxUnit, см. test.ps1).
+  С -Bot загружает ещё канал «бот в обсуждениях 1С» — расширение «ИИОператор_Бот». Ему нужны платформа 8.3.25
+  и режим совместимости конфигурации не ниже 8.3.25, а в конфигурации — патч tools/install-bot-cfg.ps1.
+
+  С -Tests загружает ещё расширение тестов «ИИОператор_Тесты» (нужен YAxUnit, см. test.ps1), вместе с -Bot —
+  и тесты бота «ИИОператор_Бот_Тесты».
   ibcmd требует монопольного доступа: клиент 1С на этой базе должен быть закрыт.
 
 .EXAMPLE
   ./build.ps1 -InfoBase 'C:\Bases\Acc' -User 'Администратор' -ClientMcp build/client_mcp-0.6.5-auth.cfe
   ./build.ps1 -InfoBase 'C:\Bases\Acc' -User 'Администратор' -Tests
+  ./build.ps1 -InfoBase 'C:\Bases\Trade' -User 'Администратор' -Bot
 #>
 param(
 	[Parameter(Mandatory)]
@@ -25,6 +30,8 @@ param(
 	# client_mcp с проверкой токена (tools/build-client-mcp.ps1). Ставится перед ядром.
 	[string]$ClientMcp = '',
 	[switch]$Tests,
+	# Канал «бот в обсуждениях 1С»: расширение «ИИОператор_Бот».
+	[switch]$Bot,
 	# Версия платформы, например 8.3.27.2214. По умолчанию — самая новая 8.3: платформа 8.5 может
 	# перевести файловую базу в свой формат, её указывают только явно.
 	[string]$Platform = ''
@@ -109,6 +116,8 @@ function Get-AdoptedIds([string]$Out) {
 
 $projects = [ordered]@{ 'ai-operator' = 'ИИОператор' }
 if ($Tests) { $projects['ai-operator-tests'] = 'ИИОператор_Тесты' }
+if ($Bot) { $projects['ai-operator-bot'] = 'ИИОператор_Бот' }
+if ($Bot -and $Tests) { $projects['ai-operator-bot-tests'] = 'ИИОператор_Бот_Тесты' }
 
 foreach ($project in $projects.GetEnumerator()) {
 	$src = Join-Path $PSScriptRoot "src\$($project.Key)"

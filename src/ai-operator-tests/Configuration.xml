@@ -60,9 +60,13 @@
 			<CommonModule>ОМ_ИИО_МаскированиеСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_ЗапросыСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_ПоискСервер</CommonModule>
+			<CommonModule>ОМ_ИИО_РеестрИнструментовСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_СвязиСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_ОтчетыСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_ДействияСервер</CommonModule>
+			<CommonModule>ОМ_ИИО_ДиалогиСервер</CommonModule>
+			<CommonModule>ОМ_ИИО_АгентСервер</CommonModule>
+			<CommonModule>ОМ_ИИО_МаскированиеВводаСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_ПоказКлиент</CommonModule>
 			<CommonModule>ОМ_ИИО_ЗапускКлиент</CommonModule>
 		</ChildObjects>

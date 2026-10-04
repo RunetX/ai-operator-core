@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
 	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1"/>
+	<Events>
+		<Event name="OnCreateAtServer">ПриСозданииНаСервере</Event>
+		<Event name="BeforeWrite">ПередЗаписью</Event>
+		<Event name="OnWriteAtServer">ПриЗаписиНаСервере</Event>
+	</Events>
 	<ChildItems>
 		<InputField name="ИИО_ПортMCP" id="1">
 			<DataPath>НаборКонстант.ИИО_ПортMCP</DataPath>
@@ -128,6 +133,188 @@
 			<ContextMenu name="ИИО_МаксДлинаЗапросаКонтекстноеМеню" id="20"/>
 			<ExtendedTooltip name="ИИО_МаксДлинаЗапросаРасширеннаяПодсказка" id="21"/>
 		</InputField>
+		<InputField name="ИИО_СрокХраненияДиалоговЧас" id="22">
+			<DataPath>НаборКонстант.ИИО_СрокХраненияДиалоговЧас</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Срок хранения диалогов, ч</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сколько хранится словарь маскирования и история диалога с ботом после последнего сообщения. 0 — по умолчанию, 24.</v8:content>
+				</v8:item>
+			</ToolTip>
+			<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+			<ContextMenu name="ИИО_СрокХраненияДиалоговЧасКонтекстноеМеню" id="23"/>
+			<ExtendedTooltip name="ИИО_СрокХраненияДиалоговЧасРасширеннаяПодсказка" id="24"/>
+		</InputField>
+		<UsualGroup name="ГруппаМодель" id="121">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Модель</v8:content>
+				</v8:item>
+			</Title>
+			<Group>Vertical</Group>
+			<Representation>NormalSeparation</Representation>
+			<ExtendedTooltip name="ГруппаМодельРасширеннаяПодсказка" id="122"/>
+			<ChildItems>
+				<InputField name="ИИО_АдресМодели" id="100">
+					<DataPath>НаборКонстант.ИИО_АдресМодели</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Адрес модели агента</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Адрес OpenAI-совместимого API без /chat/completions, например http://localhost:1234/v1 для LM Studio. Пусто - бот не подключен к модели.</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+					<ContextMenu name="ИИО_АдресМоделиКонтекстноеМеню" id="101"/>
+					<ExtendedTooltip name="ИИО_АдресМоделиРасширеннаяПодсказка" id="102"/>
+				</InputField>
+				<InputField name="ИИО_ИмяМодели" id="103">
+					<DataPath>НаборКонстант.ИИО_ИмяМодели</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Имя модели агента</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Имя модели, как его показывает сервис, например gemma-4-26b-a4b-it.</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+					<ContextMenu name="ИИО_ИмяМоделиКонтекстноеМеню" id="104"/>
+					<ExtendedTooltip name="ИИО_ИмяМоделиРасширеннаяПодсказка" id="105"/>
+				</InputField>
+				<InputField name="КлючДоступа" id="123">
+					<DataPath>КлючДоступа</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ключ API модели агента</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Для облачных сервисов с ключом. Хранится в безопасном хранилище и в форме не показывается: введите новый ключ, чтобы заменить. Для LM Studio не нужен.</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+					<PasswordMode>true</PasswordMode>
+					<ContextMenu name="КлючДоступаКонтекстноеМеню" id="124"/>
+					<ExtendedTooltip name="КлючДоступаРасширеннаяПодсказка" id="125"/>
+				</InputField>
+				<CheckBoxField name="УдалитьКлючДоступа" id="126">
+					<DataPath>УдалитьКлючДоступа</DataPath>
+					<TitleLocation>Right</TitleLocation>
+					<ContextMenu name="УдалитьКлючДоступаКонтекстноеМеню" id="127"/>
+					<ExtendedTooltip name="УдалитьКлючДоступаРасширеннаяПодсказка" id="128"/>
+				</CheckBoxField>
+				<InputField name="ИИО_ТаймаутМоделиСек" id="106">
+					<DataPath>НаборКонстант.ИИО_ТаймаутМоделиСек</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Таймаут ответа модели, с</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сколько ждать один ответ модели. 0 - по умолчанию, 180.</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+					<ContextMenu name="ИИО_ТаймаутМоделиСекКонтекстноеМеню" id="107"/>
+					<ExtendedTooltip name="ИИО_ТаймаутМоделиСекРасширеннаяПодсказка" id="108"/>
+				</InputField>
+				<InputField name="ИИО_ШагиАгента" id="109">
+					<DataPath>НаборКонстант.ИИО_ШагиАгента</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Шагов агента за ход</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сколько раз за ход агент обращается к модели (вызовы инструментов и ответ). 0 - по умолчанию, 8.</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+					<ContextMenu name="ИИО_ШагиАгентаКонтекстноеМеню" id="110"/>
+					<ExtendedTooltip name="ИИО_ШагиАгентаРасширеннаяПодсказка" id="111"/>
+				</InputField>
+				<InputField name="ИИО_ДлинаИстории" id="112">
+					<DataPath>НаборКонстант.ИИО_ДлинаИстории</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сообщений истории</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сколько последних сообщений диалога видит модель. 0 - по умолчанию, 20.</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+					<ContextMenu name="ИИО_ДлинаИсторииКонтекстноеМеню" id="113"/>
+					<ExtendedTooltip name="ИИО_ДлинаИсторииРасширеннаяПодсказка" id="114"/>
+				</InputField>
+				<InputField name="ИИО_АдресМоделиМаскирования" id="115">
+					<DataPath>НаборКонстант.ИИО_АдресМоделиМаскирования</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Адрес модели маскирования</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Локальная модель, которая ищет людей в вопросе пользователя до отправки основной модели: только localhost или частная сеть. Пусто - людей не из базы ищут правила.</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+					<ContextMenu name="ИИО_АдресМоделиМаскированияКонтекстноеМеню" id="116"/>
+					<ExtendedTooltip name="ИИО_АдресМоделиМаскированияРасширеннаяПодсказка" id="117"/>
+				</InputField>
+				<InputField name="ИИО_ИмяМоделиМаскирования" id="118">
+					<DataPath>НаборКонстант.ИИО_ИмяМоделиМаскирования</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Имя модели маскирования</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Например gemma-4-26b-a4b-it.</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ToolTipRepresentation>ShowBottom</ToolTipRepresentation>
+					<ContextMenu name="ИИО_ИмяМоделиМаскированияКонтекстноеМеню" id="119"/>
+					<ExtendedTooltip name="ИИО_ИмяМоделиМаскированияРасширеннаяПодсказка" id="120"/>
+				</InputField>
+			</ChildItems>
+		</UsualGroup>
 	</ChildItems>
 	<Attributes>
 		<Attribute name="НаборКонстант" id="1">
@@ -149,7 +336,59 @@
 				<Field>НаборКонстант.ИИО_СрокПредпросмотраСек</Field>
 				<Field>НаборКонстант.ИИО_ОжиданиеОчередиСек</Field>
 				<Field>НаборКонстант.ИИО_МаксДлинаЗапроса</Field>
+				<Field>НаборКонстант.ИИО_СрокХраненияДиалоговЧас</Field>
+				<Field>НаборКонстант.ИИО_АдресМодели</Field>
+				<Field>НаборКонстант.ИИО_ИмяМодели</Field>
+				<Field>НаборКонстант.ИИО_ТаймаутМоделиСек</Field>
+				<Field>НаборКонстант.ИИО_ШагиАгента</Field>
+				<Field>НаборКонстант.ИИО_ДлинаИстории</Field>
+				<Field>НаборКонстант.ИИО_АдресМоделиМаскирования</Field>
+				<Field>НаборКонстант.ИИО_ИмяМоделиМаскирования</Field>
 			</UseAlways>
+		</Attribute>
+		<Attribute name="КлючДоступа" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ключ API модели агента</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="УдалитьКлючДоступа" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Удалить ключ API</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:boolean</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="ИсходныйАдресМодели" id="4">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="ИсходныйАдресМоделиМаскирования" id="5">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
 		</Attribute>
 	</Attributes>
 </Form>
