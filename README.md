@@ -14,6 +14,8 @@
 
 Про надстройку для кадрового ЭДО: [ИИ-оператор управляет КЭДО](https://infostart.ru/1c/articles/2806328/), код — [RunetX/ai-operator-kedo](https://github.com/RunetX/ai-operator-kedo). Пакет для электронных транспортных накладных — [RunetX/ai-operator-epd](https://github.com/RunetX/ai-operator-epd).
 
+Про маскирование персональных данных в вопросе пользователя: [Из Иванова приехали две фуры: как прятать персональные данные в падежах и прозвищах](https://infostart.ru/1c/articles/2807944/).
+
 ---
 
 ## Содержание
