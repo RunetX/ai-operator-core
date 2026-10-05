@@ -50,7 +50,7 @@
 				<xr:Item xsi:type="xr:MDObjectRef">Role.ИИО_ПолныеПрава</xr:Item>
 			</DefaultRoles>
 			<Vendor>RunetX</Vendor>
-			<Version>0.1.11.1</Version>
+			<Version>0.1.12.0</Version>
 			<BriefInformation>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -146,6 +146,8 @@
 			<Constant>ИИО_ЛимитСтрок</Constant>
 			<Constant>ИИО_СрокПредпросмотраСек</Constant>
 			<Constant>ИИО_СрокХраненияДиалоговЧас</Constant>
+			<Constant>ИИО_СрокХраненияЖурналаОбменаДней</Constant>
+			<Constant>ИИО_СтрогийРежимМаскирования</Constant>
 			<Constant>ИИО_АдресМодели</Constant>
 			<Constant>ИИО_ИмяМодели</Constant>
 			<Constant>ИИО_ТаймаутМоделиСек</Constant>
@@ -166,6 +168,7 @@
 			<InformationRegister>ИИО_СловаМаскирования</InformationRegister>
 			<InformationRegister>ИИО_ДанныеОтката</InformationRegister>
 			<InformationRegister>ИИО_Диалоги</InformationRegister>
+			<InformationRegister>ИИО_ОбращенияКМодели</InformationRegister>
 			<Constant>ИИО_ЛимитОбъектовДействия</Constant>
 			<CommonModule>ИИО_Диалоги</CommonModule>
 			<CommonModule>ИИО_МодельHTTP</CommonModule>
@@ -180,6 +183,8 @@
 			<CommonForm>ИИО_Предпросмотр</CommonForm>
 			<CommonForm>ИИО_ЖурналОпераций</CommonForm>
 			<CommonCommand>ИИО_ЖурналОпераций</CommonCommand>
+			<CommonForm>ИИО_ЖурналОбменаСМоделью</CommonForm>
+			<CommonCommand>ИИО_ЖурналОбменаСМоделью</CommonCommand>
 			<InformationRegister>ИИО_МаскируемыеПоля</InformationRegister>
 			<CommonForm>ИИО_НастройкаМаскирования</CommonForm>
 			<CommonCommand>ИИО_НастройкаМаскирования</CommonCommand>

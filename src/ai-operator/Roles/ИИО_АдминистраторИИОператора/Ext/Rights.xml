@@ -18,7 +18,21 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonForm.ИИО_ЖурналОбменаСМоделью</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonCommand.ИИО_ЖурналОпераций</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonCommand.ИИО_ЖурналОбменаСМоделью</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -275,6 +289,44 @@
 	</object>
 	<object>
 		<name>Constant.ИИО_СрокХраненияДиалоговЧас</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.ИИО_СрокХраненияЖурналаОбменаДней</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.ИИО_СтрогийРежимМаскирования</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

@@ -3,7 +3,7 @@
 	<Title>
 		<v8:item>
 			<v8:lang>ru</v8:lang>
-			<v8:content>Маскирование персональных данных для ИИ-оператора</v8:content>
+			<v8:content>Что видит нейросеть</v8:content>
 		</v8:item>
 	</Title>
 	<Width>130</Width>
@@ -29,6 +29,36 @@
 		<Event name="BeforeClose">ПередЗакрытием</Event>
 	</Events>
 	<ChildItems>
+		<CheckBoxField name="СтрогийРежим" id="169">
+			<DataPath>СтрогийРежим</DataPath>
+			<TitleLocation>Right</TitleLocation>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Скрывать от модели и данные контрагентов-юрлиц: наименование, ИНН, КПП, адреса и контакты. Суммы, цены, номера документов и товары остаются открытыми, свои организации - тоже. Цена: модель не сможет сопоставлять контрагентов по ИНН, например в сверке НДС.</v8:content>
+				</v8:item>
+			</ToolTip>
+			<ToolTipRepresentation>Button</ToolTipRepresentation>
+			<ContextMenu name="СтрогийРежимКонтекстноеМеню" id="170"/>
+			<ExtendedTooltip name="СтрогийРежимРасширеннаяПодсказка" id="171"/>
+			<Events>
+				<Event name="OnChange">СтрогийРежимПриИзменении</Event>
+			</Events>
+		</CheckBoxField>
+		<LabelDecoration name="Состояние" id="166">
+			<AutoMaxWidth>false</AutoMaxWidth>
+			<Title formatted="false">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Состояние защиты</v8:content>
+				</v8:item>
+			</Title>
+			<ContextMenu name="СостояниеКонтекстноеМеню" id="167"/>
+			<ExtendedTooltip name="СостояниеРасширеннаяПодсказка" id="168"/>
+			<Events>
+				<Event name="URLProcessing">СостояниеОбработкаНавигационнойСсылки</Event>
+			</Events>
+		</LabelDecoration>
 		<Pages name="Страницы" id="164">
 			<ExtendedTooltip name="СтраницыРасширеннаяПодсказка" id="165"/>
 			<ChildItems>
@@ -564,6 +594,17 @@
 					</Type>
 				</Column>
 			</Columns>
+		</Attribute>
+		<Attribute name="СтрогийРежим" id="6">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Строгий режим: скрывать и данные контрагентов-юрлиц</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:boolean</v8:Type>
+			</Type>
 		</Attribute>
 	</Attributes>
 	<Commands>
