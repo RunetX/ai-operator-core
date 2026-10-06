@@ -30,14 +30,15 @@
 
 	Контекст = ИИО_РеестрИнструментов.НовыйКонтекстВызова();
 
-	ИменаБота = "describe_metadata,find_ref,related_objects,run_query,open_object,show_in_1c,perform";
+	ИменаБота = "describe_metadata,find_ref,related_objects,explain_error,run_query,list_reports,run_report,open_object,"
+		+ "show_in_1c,perform";
 	Для Каждого Имя Из СтрРазделить(ИменаБота, ",") Цикл
 		Инструмент = Контекст.Инструменты.Получить(Имя);
 		ЮТест.ОжидаетЧто(Инструмент, Имя).Заполнено();
 		ЮТест.ОжидаетЧто(Инструмент.Описание, Имя).Заполнено();
 		ЮТест.ОжидаетЧто(Инструмент.Схема.type, Имя).Равно("object");
 	КонецЦикла;
-	Для Каждого Имя Из СтрРазделить("ping,print_documents,list_reports,run_report,undo,close_forms", ",") Цикл
+	Для Каждого Имя Из СтрРазделить("ping,print_documents,undo,close_forms", ",") Цикл
 		ЮТест.ОжидаетЧто(Контекст.Инструменты.Получить(Имя), Имя).ЭтоНеопределено();
 	КонецЦикла;
 

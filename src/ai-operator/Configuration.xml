@@ -50,7 +50,7 @@
 				<xr:Item xsi:type="xr:MDObjectRef">Role.ИИО_ПолныеПрава</xr:Item>
 			</DefaultRoles>
 			<Vendor>RunetX</Vendor>
-			<Version>0.1.12.0</Version>
+			<Version>0.1.13.0</Version>
 			<BriefInformation>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -121,6 +121,8 @@
 			<CommonModule>ИИО_ПечатьВызовСервера</CommonModule>
 			<CommonModule>ИИО_Связи</CommonModule>
 			<CommonModule>ИИО_СвязиВызовСервера</CommonModule>
+			<CommonModule>ИИО_РазборОшибок</CommonModule>
+			<CommonModule>ИИО_РазборОшибокВызовСервера</CommonModule>
 			<CommonModule>ИИО_ФоновыеЗадания</CommonModule>
 			<CommonModule>ИИО_ФоновыеЗаданияВызовСервера</CommonModule>
 			<CommonModule>ИИО_ФоновыеЗаданияКлиент</CommonModule>
