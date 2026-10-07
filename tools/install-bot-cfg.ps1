@@ -88,8 +88,13 @@ $config = [IO.File]::ReadAllText((Join-Path $dump 'Configuration.xml'))
 $modulePath = Join-Path $dump 'Ext\ManagedApplicationModule.bsl'
 $module = [IO.File]::ReadAllText($modulePath)
 $hasBot = $config -match '<Bot>ИИОператор</Bot>'
-$hasHandler = $module -match 'Процедура\s+АвтоПодборПользователейСистемыВзаимодействия\s*\('
-Write-Host "  бот ИИОператор: $(if ($hasBot) { 'есть' } else { 'нет' }); обработчик подбора: $(if ($hasHandler) { 'есть' } else { 'нет' })"
+# Пустые обработчики событий модуля приложения, которые дополняет расширение: дописываются только недостающие.
+$insertText = [IO.File]::ReadAllText((Join-Path $src 'ManagedApplicationModule.insert.bsl')) -replace "`r`n", "`n"
+$handlers = [regex]::Matches($insertText, '(?ms)^Процедура\s+(\w+)\(.*?^КонецПроцедуры')
+$missing = @($handlers | Where-Object { $module -notmatch "Процедура\s+$($_.Groups[1].Value)\s*\(" })
+$hasHandler = $missing.Count -eq 0
+$missingNames = ($missing | ForEach-Object { $_.Groups[1].Value }) -join ', '
+Write-Host "  бот ИИОператор: $(if ($hasBot) { 'есть' } else { 'нет' }); обработчики модуля приложения: $(if ($hasHandler) { 'есть' } else { "нет $missingNames" })"
 if ($Check) {
 	if (-not ($hasBot -and $hasHandler)) { throw 'Патч конфигурации не на месте: запустите скрипт без -Check.' }
 	Write-Host 'Патч на месте.'
@@ -110,9 +115,10 @@ $configOut = Join-Path $load 'Configuration.xml'
 $files.Add($configOut)
 
 if (-not $hasHandler) {
-	$insert = ([IO.File]::ReadAllText((Join-Path $src 'ManagedApplicationModule.insert.bsl')) -replace "`r`n", "`n" -replace "`n", "`r`n").TrimEnd()
+	$header = $insertText.Substring(0, $handlers[0].Index).Trim()
+	$insert = ((@($header) + ($missing | ForEach-Object { $_.Value })) -join "`n`n") -replace "`n", "`r`n"
 	$region = [regex]::new('(?s)(#Область ОбработчикиСобытий.*?)(\r\n#КонецОбласти)')
-	if (-not $region.IsMatch($module)) { throw 'В модуле приложения нет области ОбработчикиСобытий: добавьте обработчик подбора вручную.' }
+	if (-not $region.IsMatch($module)) { throw 'В модуле приложения нет области ОбработчикиСобытий: добавьте обработчики вручную.' }
 	$module = $region.Replace($module, { param($m) $m.Groups[1].Value + "`r`n" + $insert + "`r`n" + $m.Groups[2].Value }, 1)
 	$moduleOut = Join-Path $load 'Ext\ManagedApplicationModule.bsl'
 	New-Item -ItemType Directory -Force (Split-Path $moduleOut) | Out-Null

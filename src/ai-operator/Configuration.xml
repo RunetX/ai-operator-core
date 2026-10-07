@@ -50,7 +50,7 @@
 				<xr:Item xsi:type="xr:MDObjectRef">Role.ИИО_ПолныеПрава</xr:Item>
 			</DefaultRoles>
 			<Vendor>RunetX</Vendor>
-			<Version>0.1.15.0</Version>
+			<Version>0.1.15.1</Version>
 			<BriefInformation>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
