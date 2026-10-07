@@ -1,0 +1,4 @@
+# Макет с внешней компонентой (zip): байты должны совпадать с addin/mcp-transport/SHA256SUMS.
+*.bin binary
+# Пакетные файлы Windows с одними LF cmd разбирает ненадёжно.
+*.cmd text eol=crlf

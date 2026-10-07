@@ -1,0 +1,36 @@
+[package]
+name = "ai-operator-mcp-transport"
+version = "0.1.0"
+edition = "2021"
+license = "AGPL-3.0-only"
+description = "MCP-транспорт ИИ-оператора 1С: внешняя компонента Native API с сервером Streamable HTTP"
+publish = false
+
+[lib]
+name = "ai_operator_mcp"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "mcp-transport-dev"
+path = "src/bin/dev.rs"
+
+[dependencies]
+addin1c = "=0.7.0"
+bytes = "1"
+getrandom = "0.3"
+http-body = "1"
+http-body-util = "0.1"
+hyper = { version = "1", features = ["server", "http1"] }
+hyper-util = { version = "0.1", features = ["tokio"] }
+serde_json = { version = "1", features = ["preserve_order", "raw_value"] }
+subtle = "2"
+tokio = { version = "1", features = ["rt", "net", "time", "sync", "macros"] }
+
+[profile.release]
+opt-level = "s"
+lto = "fat"
+codegen-units = 1
+strip = "symbols"
+debug = 0
+panic = "unwind"
+incremental = false

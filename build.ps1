@@ -1,11 +1,12 @@
 <#
 .SYNOPSIS
-  Загружает расширение «ИИОператор» из исходников в файловую базу 1С. С -ClientMcp сначала ставит client_mcp.
+  Загружает расширение «ИИОператор» из исходников в файловую базу 1С. MCP-транспорт (внешняя компонента)
+  уже лежит в расширении: ни Rust, ни client_mcp не нужны.
 
 .DESCRIPTION
   Исходники хранятся в UTF-8 без BOM с LF. Скрипт копирует их в build/, приводит к формату выгрузки
   конфигуратора (UTF-8 с BOM, CRLF), загружает расширение через ibcmd и выключает для него безопасный
-  режим и защиту от опасных действий: этого требует client_mcp, а журналу операций нужен привилегированный режим.
+  режим и защиту от опасных действий: компоненте транспорта и журналу операций нужен привилегированный режим.
 
   Расширение заимствует справочники «Пользователи» и «Группы пользователей». Их идентификаторы в разных
   конфигурациях разные, поэтому скрипт выгружает эти два объекта из базы и подставляет их идентификаторы.
@@ -18,7 +19,7 @@
   ibcmd требует монопольного доступа: клиент 1С на этой базе должен быть закрыт.
 
 .EXAMPLE
-  ./build.ps1 -InfoBase 'C:\Bases\Acc' -User 'Администратор' -ClientMcp build/client_mcp-0.6.5-auth.cfe
+  ./build.ps1 -InfoBase 'C:\Bases\Acc' -User 'Администратор'
   ./build.ps1 -InfoBase 'C:\Bases\Acc' -User 'Администратор' -Tests
   ./build.ps1 -InfoBase 'C:\Bases\Trade' -User 'Администратор' -Bot
 #>
@@ -27,8 +28,6 @@ param(
 	[string]$InfoBase,
 	[string]$User = '',
 	[string]$Password = '',
-	# client_mcp с проверкой токена (tools/build-client-mcp.ps1). Ставится перед ядром.
-	[string]$ClientMcp = '',
 	[switch]$Tests,
 	# Канал «бот в обсуждениях 1С»: расширение «ИИОператор_Бот».
 	[switch]$Bot,
@@ -51,7 +50,6 @@ function Find-PlatformFile([string]$Name) {
 $ibcmd = Find-PlatformFile 'ibcmd.exe'
 if (-not (Test-Path $ibcmd)) { throw "Не найден ibcmd: $ibcmd" }
 if (-not (Test-Path $InfoBase)) { throw "Не найден каталог базы: $InfoBase" }
-if ($ClientMcp -and -not (Test-Path $ClientMcp)) { throw "Не найден client_mcp: $ClientMcp. Соберите его: ./tools/build-client-mcp.ps1" }
 
 $build = Join-Path $PSScriptRoot 'build'
 $common = @("--db-path=$InfoBase", "--data=$(Join-Path $build 'ibcmd-data')")
@@ -68,12 +66,6 @@ function Invoke-Ibcmd([string[]]$Arguments) {
 function Install-Extension([string]$Name) {
 	Invoke-Ibcmd @('config', 'apply', "--extension=$Name", '--force')
 	Invoke-Ibcmd @('config', 'extension', 'update', "--name=$Name", '--safe-mode=no', '--unsafe-action-protection=no')
-}
-
-if ($ClientMcp) {
-	Write-Host ">> client_mcp <- $ClientMcp"
-	Invoke-Ibcmd @('config', 'load', '--extension=client_mcp', (Resolve-Path $ClientMcp).Path)
-	Install-Extension 'client_mcp'
 }
 
 # Виды метаданных по каталогам выгрузки: для заимствованных объектов и порядка ChildObjects.

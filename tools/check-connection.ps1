@@ -172,7 +172,7 @@ $anonymous = Invoke-Mcp 'initialize' $initialize -Token ''
 Stop-OnNoAnswer $anonymous
 if ($anonymous.Status -ge 200 -and $anonymous.Status -lt 300) {
 	Stop-Check "Сервер принимает запросы без токена" ("остановить сервер и запустить его командой ${startCommand}: она проверяет авторизацию при запуске. " +
-		"Если ИИ-оператор предупредит, что компонента не проверяет токен, установить client_mcp из сборки с проверкой токена")
+		"Если на порту работает client_mcp прежней установки, остановить его и удалить расширение client_mcp: ядру он больше не нужен")
 }
 if ($anonymous.Status -ne 401) {
 	Stop-Check "Без токена сервер ответил HTTP $($anonymous.Status), а ожидался 401" "проверить, что порт $Port принадлежит ИИ-оператору, и перезапустить его в 1С"
