@@ -66,6 +66,7 @@
 			<CommonModule>ОМ_ИИО_ДействияСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_ДиалогиСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_ЖурналСервер</CommonModule>
+			<CommonModule>ОМ_ИИО_ДиагностикаСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_АгентСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_МаскированиеВводаСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_ПоказКлиент</CommonModule>

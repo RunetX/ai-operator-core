@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Состояние ИИ-оператора</v8:content>
+		</v8:item>
+	</Title>
+	<Width>110</Width>
+	<AutoTitle>false</AutoTitle>
+	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1">
+		<Autofill>false</Autofill>
+		<ChildItems>
+			<Button name="ФормаОбновить" id="1">
+				<Type>CommandBarButton</Type>
+				<DefaultButton>true</DefaultButton>
+				<CommandName>Form.Command.Обновить</CommandName>
+				<ExtendedTooltip name="ФормаОбновитьРасширеннаяПодсказка" id="2"/>
+			</Button>
+			<Button name="ФормаВыполнитьДействие" id="3">
+				<Type>CommandBarButton</Type>
+				<CommandName>Form.Command.ВыполнитьДействие</CommandName>
+				<ExtendedTooltip name="ФормаВыполнитьДействиеРасширеннаяПодсказка" id="4"/>
+			</Button>
+			<Button name="ФормаНастройкиClaudeCode" id="5">
+				<Type>CommandBarButton</Type>
+				<CommandName>Form.Command.НастройкиClaudeCode</CommandName>
+				<ExtendedTooltip name="ФормаНастройкиClaudeCodeРасширеннаяПодсказка" id="6"/>
+			</Button>
+			<Button name="ФормаНастройкиClaudeDesktop" id="7">
+				<Type>CommandBarButton</Type>
+				<CommandName>Form.Command.НастройкиClaudeDesktop</CommandName>
+				<ExtendedTooltip name="ФормаНастройкиClaudeDesktopРасширеннаяПодсказка" id="8"/>
+			</Button>
+			<Button name="ФормаСкопироватьОтчет" id="9">
+				<Type>CommandBarButton</Type>
+				<CommandName>Form.Command.СкопироватьОтчет</CommandName>
+				<ExtendedTooltip name="ФормаСкопироватьОтчетРасширеннаяПодсказка" id="10"/>
+			</Button>
+		</ChildItems>
+	</AutoCommandBar>
+	<Events>
+		<Event name="OnOpen">ПриОткрытии</Event>
+		<Event name="OnCreateAtServer">ПриСозданииНаСервере</Event>
+	</Events>
+	<ChildItems>
+		<LabelDecoration name="Итог" id="11">
+			<AutoMaxWidth>false</AutoMaxWidth>
+			<Title formatted="false">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Проверка...</v8:content>
+				</v8:item>
+			</Title>
+			<ContextMenu name="ИтогКонтекстноеМеню" id="12"/>
+			<ExtendedTooltip name="ИтогРасширеннаяПодсказка" id="13"/>
+		</LabelDecoration>
+		<Table name="Проверки" id="14">
+			<Representation>List</Representation>
+			<CommandBarLocation>None</CommandBarLocation>
+			<ReadOnly>true</ReadOnly>
+			<HeightInTableRows>16</HeightInTableRows>
+			<DataPath>Проверки</DataPath>
+			<SearchStringLocation>None</SearchStringLocation>
+			<ViewStatusLocation>None</ViewStatusLocation>
+			<SearchControlLocation>None</SearchControlLocation>
+			<RowFilter xsi:nil="true"/>
+			<ContextMenu name="ПроверкиКонтекстноеМеню" id="15"/>
+			<AutoCommandBar name="ПроверкиКоманднаяПанель" id="16"/>
+			<ExtendedTooltip name="ПроверкиРасширеннаяПодсказка" id="17"/>
+			<SearchStringAddition name="ПроверкиСтрокаПоиска" id="18">
+				<AdditionSource>
+					<Item>Проверки</Item>
+					<Type>SearchStringRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ПроверкиСтрокаПоискаКонтекстноеМеню" id="19"/>
+				<ExtendedTooltip name="ПроверкиСтрокаПоискаРасширеннаяПодсказка" id="20"/>
+			</SearchStringAddition>
+			<ViewStatusAddition name="ПроверкиСостояниеПросмотра" id="21">
+				<AdditionSource>
+					<Item>Проверки</Item>
+					<Type>ViewStatusRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ПроверкиСостояниеПросмотраКонтекстноеМеню" id="22"/>
+				<ExtendedTooltip name="ПроверкиСостояниеПросмотраРасширеннаяПодсказка" id="23"/>
+			</ViewStatusAddition>
+			<SearchControlAddition name="ПроверкиУправлениеПоиском" id="24">
+				<AdditionSource>
+					<Item>Проверки</Item>
+					<Type>SearchControl</Type>
+				</AdditionSource>
+				<ContextMenu name="ПроверкиУправлениеПоискомКонтекстноеМеню" id="25"/>
+				<ExtendedTooltip name="ПроверкиУправлениеПоискомРасширеннаяПодсказка" id="26"/>
+			</SearchControlAddition>
+			<Events>
+				<Event name="Selection">ПроверкиВыбор</Event>
+			</Events>
+			<ChildItems>
+				<InputField name="ПроверкиГруппаПредставление" id="27">
+					<DataPath>Проверки.ГруппаПредставление</DataPath>
+					<Width>18</Width>
+					<ContextMenu name="ПроверкиГруппаПредставлениеКонтекстноеМеню" id="28"/>
+					<ExtendedTooltip name="ПроверкиГруппаПредставлениеРасширеннаяПодсказка" id="29"/>
+				</InputField>
+				<InputField name="ПроверкиЗаголовок" id="30">
+					<DataPath>Проверки.Заголовок</DataPath>
+					<Width>26</Width>
+					<ContextMenu name="ПроверкиЗаголовокКонтекстноеМеню" id="31"/>
+					<ExtendedTooltip name="ПроверкиЗаголовокРасширеннаяПодсказка" id="32"/>
+				</InputField>
+				<InputField name="ПроверкиСостояниеПредставление" id="33">
+					<DataPath>Проверки.СостояниеПредставление</DataPath>
+					<Width>10</Width>
+					<ContextMenu name="ПроверкиСостояниеПредставлениеКонтекстноеМеню" id="34"/>
+					<ExtendedTooltip name="ПроверкиСостояниеПредставлениеРасширеннаяПодсказка" id="35"/>
+				</InputField>
+				<InputField name="ПроверкиОписание" id="36">
+					<DataPath>Проверки.Описание</DataPath>
+					<Width>60</Width>
+					<AutoCellHeight>true</AutoCellHeight>
+					<ContextMenu name="ПроверкиОписаниеКонтекстноеМеню" id="37"/>
+					<ExtendedTooltip name="ПроверкиОписаниеРасширеннаяПодсказка" id="38"/>
+				</InputField>
+				<InputField name="ПроверкиДействиеПредставление" id="39">
+					<DataPath>Проверки.ДействиеПредставление</DataPath>
+					<Width>16</Width>
+					<ContextMenu name="ПроверкиДействиеПредставлениеКонтекстноеМеню" id="40"/>
+					<ExtendedTooltip name="ПроверкиДействиеПредставлениеРасширеннаяПодсказка" id="41"/>
+				</InputField>
+			</ChildItems>
+		</Table>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Проверки" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Проверки</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueTable</v8:Type>
+			</Type>
+			<Columns>
+				<Column name="Код" id="1">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Код</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Группа" id="2">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа (имя)</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="ГруппаПредставление" id="3">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Заголовок" id="4">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Проверка</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Статус" id="5">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Статус (код)</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="СостояниеПредставление" id="6">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Состояние</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Описание" id="7">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Что найдено и что сделать</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Действие" id="8">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Действие (код)</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="ДействиеПредставление" id="9">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Исправить</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Порядок" id="10">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Порядок</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>10</v8:Digits>
+							<v8:FractionDigits>0</v8:FractionDigits>
+							<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Column>
+			</Columns>
+		</Attribute>
+		<Attribute name="Порт" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Порт</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>10</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="ГруппыПроверок" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Группы проверок</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueListType</v8:Type>
+			</Type>
+		</Attribute>
+	</Attributes>
+	<Commands>
+		<Command name="Обновить" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Проверить снова</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Выполнить все проверки заново</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>Обновить</Action>
+			<CurrentRowUse>DontUse</CurrentRowUse>
+		</Command>
+		<Command name="ВыполнитьДействие" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Исправить</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Выполнить действие выбранной проверки</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ВыполнитьДействие</Action>
+			<CurrentRowUse>DontUse</CurrentRowUse>
+		</Command>
+		<Command name="НастройкиClaudeCode" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Настройки для Claude Code</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Настройки подключения для Claude Code: токен в них не попадает</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>НастройкиClaudeCode</Action>
+			<CurrentRowUse>DontUse</CurrentRowUse>
+		</Command>
+		<Command name="НастройкиClaudeDesktop" id="4">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Настройки для Claude Desktop и LM Studio</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Настройки подключения через мост mcp-remote: токен в них не попадает</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>НастройкиClaudeDesktop</Action>
+			<CurrentRowUse>DontUse</CurrentRowUse>
+		</Command>
+		<Command name="СкопироватьОтчет" id="5">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Отчет для поддержки</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Текст всех проверок без персональных данных и токена</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>СкопироватьОтчет</Action>
+			<CurrentRowUse>DontUse</CurrentRowUse>
+		</Command>
+	</Commands>
+</Form>

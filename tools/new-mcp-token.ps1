@@ -1,9 +1,9 @@
 ﻿<#
 .SYNOPSIS
-  Создаёт токен авторизации MCP в файле пользователя %LOCALAPPDATA%\WebTransport\mcp-token.
+  Создаёт токен авторизации MCP в файле пользователя %LOCALAPPDATA%\AiOperator\mcp-token.
 
 .DESCRIPTION
-  Компонента из форка читает этот файл при каждом запуске MCP-сервера и с этого момента принимает
+  Компонента MCP-транспорта читает этот файл при каждом запуске MCP-сервера и с этого момента принимает
   только запросы с заголовком "Authorization: Bearer <токен>". Токен не выводится на экран:
   клиенты читают его из того же файла или из переменной окружения ONEC_MCP_TOKEN.
   После перевыпуска токена сервер в 1С нужно перезапустить.
@@ -19,7 +19,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$path = Join-Path $env:LOCALAPPDATA 'WebTransport\mcp-token'
+$path = Join-Path $env:LOCALAPPDATA 'AiOperator\mcp-token'
 
 if ((Test-Path $path) -and -not $Force) {
 	Write-Host "Токен уже есть: $path (перевыпустить: -Force)"

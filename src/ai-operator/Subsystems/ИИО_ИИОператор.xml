@@ -31,6 +31,8 @@
 				<xr:Item xsi:type="xr:MDObjectRef">CommonCommand.ИИО_ЖурналОпераций</xr:Item>
 				<xr:Item xsi:type="xr:MDObjectRef">CommonForm.ИИО_ЖурналОпераций</xr:Item>
 				<xr:Item xsi:type="xr:MDObjectRef">CommonCommand.ИИО_ЖурналОбменаСМоделью</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">CommonCommand.ИИО_СостояниеИИОператора</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">CommonForm.ИИО_Состояние</xr:Item>
 				<xr:Item xsi:type="xr:MDObjectRef">CommonForm.ИИО_ЖурналОбменаСМоделью</xr:Item>
 				<xr:Item xsi:type="xr:MDObjectRef">InformationRegister.ИИО_РазрешенияДействий</xr:Item>
 				<xr:Item xsi:type="xr:MDObjectRef">CommonCommand.ИИО_НастройкаМаскирования</xr:Item>

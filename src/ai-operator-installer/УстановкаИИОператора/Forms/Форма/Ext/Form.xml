@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Установка ИИ-оператора</v8:content>
+		</v8:item>
+	</Title>
+	<Width>110</Width>
+	<AutoTitle>false</AutoTitle>
+	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1">
+		<Autofill>false</Autofill>
+		<ChildItems>
+			<Button name="ФормаУстановить" id="101">
+				<Type>CommandBarButton</Type>
+				<DefaultButton>true</DefaultButton>
+				<CommandName>Form.Command.Установить</CommandName>
+				<ExtendedTooltip name="ФормаУстановитьРасширеннаяПодсказка" id="102"/>
+			</Button>
+			<Button name="ФормаПерезапустить" id="103">
+				<Type>CommandBarButton</Type>
+				<Visible>false</Visible>
+				<CommandName>Form.Command.Перезапустить</CommandName>
+				<ExtendedTooltip name="ФормаПерезапуститьРасширеннаяПодсказка" id="104"/>
+			</Button>
+			<Button name="ФормаОбновить" id="105">
+				<Type>CommandBarButton</Type>
+				<CommandName>Form.Command.Обновить</CommandName>
+				<ExtendedTooltip name="ФормаОбновитьРасширеннаяПодсказка" id="106"/>
+			</Button>
+		</ChildItems>
+	</AutoCommandBar>
+	<Events>
+		<Event name="OnCreateAtServer">ПриСозданииНаСервере</Event>
+	</Events>
+	<ChildItems>
+		<LabelDecoration name="Пояснение" id="154">
+			<AutoMaxWidth>false</AutoMaxWidth>
+			<Title formatted="false">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ставит ядро ИИ-оператора и пакеты для этой конфигурации из релизов GitHub, снимает флаги расширений, включает журнал регистрации. После установки 1С перезапускается в форму «Состояние ИИ-оператора».</v8:content>
+				</v8:item>
+			</Title>
+			<ContextMenu name="ПояснениеКонтекстноеМеню" id="155"/>
+			<ExtendedTooltip name="ПояснениеРасширеннаяПодсказка" id="156"/>
+		</LabelDecoration>
+		<Table name="Проверки" id="125">
+			<Representation>List</Representation>
+			<CommandBarLocation>None</CommandBarLocation>
+			<ReadOnly>true</ReadOnly>
+			<ChangeRowSet>false</ChangeRowSet>
+			<ChangeRowOrder>false</ChangeRowOrder>
+			<HeightInTableRows>8</HeightInTableRows>
+			<DataPath>Проверки</DataPath>
+			<SearchStringLocation>None</SearchStringLocation>
+			<ViewStatusLocation>None</ViewStatusLocation>
+			<SearchControlLocation>None</SearchControlLocation>
+			<RowFilter xsi:nil="true"/>
+			<ContextMenu name="ПроверкиКонтекстноеМеню" id="126"/>
+			<AutoCommandBar name="ПроверкиКоманднаяПанель" id="127"/>
+			<ExtendedTooltip name="ПроверкиРасширеннаяПодсказка" id="128"/>
+			<SearchStringAddition name="ПроверкиСтрокаПоиска" id="116">
+				<AdditionSource>
+					<Item>Проверки</Item>
+					<Type>SearchStringRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ПроверкиСтрокаПоискаКонтекстноеМеню" id="117"/>
+				<ExtendedTooltip name="ПроверкиСтрокаПоискаРасширеннаяПодсказка" id="118"/>
+			</SearchStringAddition>
+			<ViewStatusAddition name="ПроверкиСостояниеПросмотра" id="119">
+				<AdditionSource>
+					<Item>Проверки</Item>
+					<Type>ViewStatusRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ПроверкиСостояниеПросмотраКонтекстноеМеню" id="120"/>
+				<ExtendedTooltip name="ПроверкиСостояниеПросмотраРасширеннаяПодсказка" id="121"/>
+			</ViewStatusAddition>
+			<SearchControlAddition name="ПроверкиУправлениеПоиском" id="122">
+				<AdditionSource>
+					<Item>Проверки</Item>
+					<Type>SearchControl</Type>
+				</AdditionSource>
+				<ContextMenu name="ПроверкиУправлениеПоискомКонтекстноеМеню" id="123"/>
+				<ExtendedTooltip name="ПроверкиУправлениеПоискомРасширеннаяПодсказка" id="124"/>
+			</SearchControlAddition>
+			<ChildItems>
+				<InputField name="ПроверкиЗаголовок" id="107">
+					<DataPath>Проверки.Заголовок</DataPath>
+					<ReadOnly>true</ReadOnly>
+					<Width>24</Width>
+					<ContextMenu name="ПроверкиЗаголовокКонтекстноеМеню" id="108"/>
+					<ExtendedTooltip name="ПроверкиЗаголовокРасширеннаяПодсказка" id="109"/>
+				</InputField>
+				<InputField name="ПроверкиСостояниеПредставление" id="110">
+					<DataPath>Проверки.СостояниеПредставление</DataPath>
+					<ReadOnly>true</ReadOnly>
+					<Width>9</Width>
+					<ContextMenu name="ПроверкиСостояниеПредставлениеКонтекстноеМеню" id="111"/>
+					<ExtendedTooltip name="ПроверкиСостояниеПредставлениеРасширеннаяПодсказка" id="112"/>
+				</InputField>
+				<InputField name="ПроверкиОписание" id="113">
+					<DataPath>Проверки.Описание</DataPath>
+					<ReadOnly>true</ReadOnly>
+					<Width>60</Width>
+					<AutoCellHeight>true</AutoCellHeight>
+					<ContextMenu name="ПроверкиОписаниеКонтекстноеМеню" id="114"/>
+					<ExtendedTooltip name="ПроверкиОписаниеРасширеннаяПодсказка" id="115"/>
+				</InputField>
+			</ChildItems>
+		</Table>
+		<Table name="Компоненты" id="150">
+			<Representation>List</Representation>
+			<CommandBarLocation>None</CommandBarLocation>
+			<ChangeRowSet>false</ChangeRowSet>
+			<ChangeRowOrder>false</ChangeRowOrder>
+			<HeightInTableRows>5</HeightInTableRows>
+			<DataPath>Компоненты</DataPath>
+			<SearchStringLocation>None</SearchStringLocation>
+			<ViewStatusLocation>None</ViewStatusLocation>
+			<SearchControlLocation>None</SearchControlLocation>
+			<RowFilter xsi:nil="true"/>
+			<ContextMenu name="КомпонентыКонтекстноеМеню" id="151"/>
+			<AutoCommandBar name="КомпонентыКоманднаяПанель" id="152"/>
+			<ExtendedTooltip name="КомпонентыРасширеннаяПодсказка" id="153"/>
+			<SearchStringAddition name="КомпонентыСтрокаПоиска" id="141">
+				<AdditionSource>
+					<Item>Компоненты</Item>
+					<Type>SearchStringRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="КомпонентыСтрокаПоискаКонтекстноеМеню" id="142"/>
+				<ExtendedTooltip name="КомпонентыСтрокаПоискаРасширеннаяПодсказка" id="143"/>
+			</SearchStringAddition>
+			<ViewStatusAddition name="КомпонентыСостояниеПросмотра" id="144">
+				<AdditionSource>
+					<Item>Компоненты</Item>
+					<Type>ViewStatusRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="КомпонентыСостояниеПросмотраКонтекстноеМеню" id="145"/>
+				<ExtendedTooltip name="КомпонентыСостояниеПросмотраРасширеннаяПодсказка" id="146"/>
+			</ViewStatusAddition>
+			<SearchControlAddition name="КомпонентыУправлениеПоиском" id="147">
+				<AdditionSource>
+					<Item>Компоненты</Item>
+					<Type>SearchControl</Type>
+				</AdditionSource>
+				<ContextMenu name="КомпонентыУправлениеПоискомКонтекстноеМеню" id="148"/>
+				<ExtendedTooltip name="КомпонентыУправлениеПоискомРасширеннаяПодсказка" id="149"/>
+			</SearchControlAddition>
+			<ChildItems>
+				<CheckBoxField name="КомпонентыПометка" id="129">
+					<DataPath>Компоненты.Пометка</DataPath>
+					<ShowInHeader>false</ShowInHeader>
+					<EditMode>EnterOnInput</EditMode>
+					<CheckBoxType>Auto</CheckBoxType>
+					<ContextMenu name="КомпонентыПометкаКонтекстноеМеню" id="130"/>
+					<ExtendedTooltip name="КомпонентыПометкаРасширеннаяПодсказка" id="131"/>
+					<Events>
+						<Event name="OnChange">КомпонентыПометкаПриИзменении</Event>
+					</Events>
+				</CheckBoxField>
+				<InputField name="КомпонентыПредставление" id="132">
+					<DataPath>Компоненты.Представление</DataPath>
+					<ReadOnly>true</ReadOnly>
+					<Width>24</Width>
+					<ContextMenu name="КомпонентыПредставлениеКонтекстноеМеню" id="133"/>
+					<ExtendedTooltip name="КомпонентыПредставлениеРасширеннаяПодсказка" id="134"/>
+				</InputField>
+				<InputField name="КомпонентыВерсия" id="135">
+					<DataPath>Компоненты.Версия</DataPath>
+					<ReadOnly>true</ReadOnly>
+					<Width>9</Width>
+					<ContextMenu name="КомпонентыВерсияКонтекстноеМеню" id="136"/>
+					<ExtendedTooltip name="КомпонентыВерсияРасширеннаяПодсказка" id="137"/>
+				</InputField>
+				<InputField name="КомпонентыСостояние" id="138">
+					<DataPath>Компоненты.Состояние</DataPath>
+					<ReadOnly>true</ReadOnly>
+					<Width>60</Width>
+					<AutoCellHeight>true</AutoCellHeight>
+					<ContextMenu name="КомпонентыСостояниеКонтекстноеМеню" id="139"/>
+					<ExtendedTooltip name="КомпонентыСостояниеРасширеннаяПодсказка" id="140"/>
+				</InputField>
+			</ChildItems>
+		</Table>
+		<CheckBoxField name="ДобавитьВГруппу" id="157">
+			<DataPath>ДобавитьВГруппу</DataPath>
+			<TitleLocation>Right</TitleLocation>
+			<CheckBoxType>Auto</CheckBoxType>
+			<ContextMenu name="ДобавитьВГруппуКонтекстноеМеню" id="158"/>
+			<ExtendedTooltip name="ДобавитьВГруппуРасширеннаяПодсказка" id="159"/>
+		</CheckBoxField>
+		<LabelField name="ИтогПоле" id="160">
+			<DataPath>Итог</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<AutoMaxWidth>false</AutoMaxWidth>
+			<Height>2</Height>
+			<ContextMenu name="ИтогПолеКонтекстноеМеню" id="161"/>
+			<ExtendedTooltip name="ИтогПолеРасширеннаяПодсказка" id="162"/>
+		</LabelField>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Объект" id="183">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Объект</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>cfg:ExternalDataProcessorObject.УстановкаИИОператора</v8:Type>
+			</Type>
+			<MainAttribute>true</MainAttribute>
+		</Attribute>
+		<Attribute name="Проверки" id="184">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Проверки</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueTable</v8:Type>
+			</Type>
+			<Columns>
+				<Column name="Заголовок" id="163">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Проверка</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Статус" id="164">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Статус (код)</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="СостояниеПредставление" id="165">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Состояние</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Описание" id="166">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Что найдено и что сделать</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+			</Columns>
+		</Attribute>
+		<Attribute name="Компоненты" id="185">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Компоненты</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueTable</v8:Type>
+			</Type>
+			<Columns>
+				<Column name="Пометка" id="167">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ставить</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:boolean</v8:Type>
+					</Type>
+				</Column>
+				<Column name="Код" id="168">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Код</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Представление" id="169">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Компонент</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Расширение" id="170">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Расширение</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Версия" id="171">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Версия</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Установлена" id="172">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Установлена</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Действие" id="173">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Действие (код)</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Причина" id="174">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Причина</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Файл" id="175">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Файл</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Адрес" id="176">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Адрес</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Хеш" id="177">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>SHA-256</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Дайджест" id="178">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>SHA-256 GitHub</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Размер" id="179">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Размер</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>15</v8:Digits>
+							<v8:FractionDigits>0</v8:FractionDigits>
+							<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Column>
+				<Column name="Обязательный" id="180">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Обязательный</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:boolean</v8:Type>
+					</Type>
+				</Column>
+				<Column name="Доступен" id="181">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Можно снять</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:boolean</v8:Type>
+					</Type>
+				</Column>
+				<Column name="Состояние" id="182">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Что будет</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+			</Columns>
+		</Attribute>
+		<Attribute name="ДобавитьВГруппу" id="186">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Добавить меня в группу доступа «ИИ-оператор»</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:boolean</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="МожноУстанавливать" id="187">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Можно устанавливать</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:boolean</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="Итог" id="188">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Итог</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Шаги" id="189">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Шаги установки</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueListType</v8:Type>
+			</Type>
+		</Attribute>
+	</Attributes>
+	<Commands>
+		<Command name="Установить" id="190">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Установить</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Скачать отмеченные компоненты и установить их в эту базу</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>Установить</Action>
+			<CurrentRowUse>DontUse</CurrentRowUse>
+		</Command>
+		<Command name="Перезапустить" id="191">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Перезапустить</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Перезапустить 1С и открыть «Состояние ИИ-оператора»</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>Перезапустить</Action>
+			<CurrentRowUse>DontUse</CurrentRowUse>
+		</Command>
+		<Command name="Обновить" id="192">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Проверить снова</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Повторить проверки базы и релизов</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>Обновить</Action>
+			<CurrentRowUse>DontUse</CurrentRowUse>
+		</Command>
+	</Commands>
+</Form>

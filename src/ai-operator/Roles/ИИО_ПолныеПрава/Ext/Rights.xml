@@ -467,6 +467,20 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonForm.ИИО_Состояние</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonCommand.ИИО_СостояниеИИОператора</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.ИИО_ЖурналОбменаСМоделью</name>
 		<right>
 			<name>View</name>

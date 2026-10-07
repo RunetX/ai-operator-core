@@ -47,7 +47,7 @@
 			<ConfigurationExtensionCompatibilityMode>Version8_3_25</ConfigurationExtensionCompatibilityMode>
 			<ScriptVariant>Russian</ScriptVariant>
 			<Vendor>RunetX</Vendor>
-			<Version>0.1.0.2</Version>
+			<Version>0.1.1.0</Version>
 			<BriefInformation>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -81,6 +81,8 @@
 		</Properties>
 		<ChildObjects>
 			<Language>Русский</Language>
+			<Subsystem>ИИОБ_ИИО_Пакеты</Subsystem>
+			<CommonModule>ИИОБ_СостояниеПакета</CommonModule>
 			<CommonModule>ИИОБ_Бот</CommonModule>
 			<CommonModule>ИИОБ_Боты</CommonModule>
 			<CommonModule>ИИОБ_БотВызовСервера</CommonModule>

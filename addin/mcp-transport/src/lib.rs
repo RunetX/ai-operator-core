@@ -5,8 +5,8 @@
 //! (сразу и отложенно), прогресс и отмену. Ресурсы, промпты и задачи MCP отложены.
 //!
 //! Код написан с нуля по спецификации MCP (modelcontextprotocol.io) и документации Native API.
-//! Код прежней компоненты web-transport-addin (без лицензии) не использовался.
 
+pub mod clients;
 pub mod fake;
 pub mod ffi;
 pub mod log;

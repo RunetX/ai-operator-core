@@ -16,7 +16,7 @@ use addin1c::{name, AttachType, CStr1C, CString1C, Connection, ParamValue, RawAd
 use serde_json::json;
 
 use crate::server::{self, EventSink, Options, Server, Shared};
-use crate::{log, token};
+use crate::{clients, log, token};
 
 const EVENT_BUFFER_DEPTH: c_long = 1000;
 const EVENT_RETRIES: u32 = 500;
@@ -106,6 +106,9 @@ const SEND_RESULT: usize = 5;
 const SEND_ERROR: usize = 6;
 const NOTIFY_PROGRESS: usize = 7;
 const STATE: usize = 8;
+const TOKEN_STATE: usize = 9;
+const CREATE_TOKEN: usize = 10;
+const PREPARE_CLIENTS: usize = 11;
 
 const METHODS: &[MethodDef] = &[
     MethodDef { en: name!("Start"), ru: name!("Запустить"), params: 3 },
@@ -117,6 +120,9 @@ const METHODS: &[MethodDef] = &[
     MethodDef { en: name!("SendError"), ru: name!("ОтправитьОшибку"), params: 3 },
     MethodDef { en: name!("NotifyProgress"), ru: name!("УведомитьОПрогрессе"), params: 4 },
     MethodDef { en: name!("State"), ru: name!("Состояние"), params: 0 },
+    MethodDef { en: name!("TokenState"), ru: name!("СостояниеТокена"), params: 0 },
+    MethodDef { en: name!("CreateToken"), ru: name!("СоздатьТокен"), params: 1 },
+    MethodDef { en: name!("PrepareClientFiles"), ru: name!("ПодготовитьФайлыКлиентов"), params: 1 },
 ];
 
 const PROP_VERSION: usize = 0;
@@ -183,6 +189,9 @@ impl McpAddin {
                 Some(Ret::Bool(sent))
             }
             STATE => Some(Ret::Str(self.shared.status())),
+            TOKEN_STATE => Some(Ret::Str(token_state())),
+            CREATE_TOKEN => Some(Ret::Str(create_token(matches!(param(0), ParamValue::Bool(true))))),
+            PREPARE_CLIENTS => Some(Ret::Str(prepare_clients(&param(0)))),
             _ => None,
         }
     }
@@ -243,6 +252,60 @@ impl McpAddin {
 impl Default for McpAddin {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+/// Есть ли токен и откуда он читается — без значения токена.
+fn token_state() -> String {
+    let status = token::status();
+    json!({
+        "exists": status.exists,
+        "source": status.source.map(token::Source::as_str),
+        "path": status.path.map(|path| clients::display_path(&path)),
+        "error": status.error,
+    })
+    .to_string()
+}
+
+/// Новый токен в файле по умолчанию. Если токен задан переменной окружения, файл создаётся, но не действует.
+fn create_token(overwrite: bool) -> String {
+    let Some(path) = token::default_file() else {
+        return json!({"ok": false, "code": "NO_LOCALAPPDATA", "error": "не задана переменная LOCALAPPDATA"}).to_string();
+    };
+    match token::create(&path, overwrite) {
+        Ok(()) => {
+            log::info("токен создан");
+            let status = token::status();
+            json!({
+                "ok": true,
+                "path": path.display().to_string(),
+                "active": status.source == Some(token::Source::DefaultFile),
+            })
+            .to_string()
+        }
+        Err(token::CreateError::Exists) => {
+            json!({"ok": false, "code": "EXISTS", "error": "токен уже есть", "path": path.display().to_string()}).to_string()
+        }
+        Err(token::CreateError::Io(message)) => json!({"ok": false, "code": "IO", "error": message}).to_string(),
+    }
+}
+
+/// Скрипты для настроек MCP-клиентов: заголовок для Claude Code и мост для Claude Desktop и LM Studio.
+fn prepare_clients(port: &ParamValue) -> String {
+    let Some(port) = number(port).filter(|port| port.fract() == 0.0 && (1.0..=65535.0).contains(port)) else {
+        return json!({"ok": false, "code": "INVALID_ARGUMENT", "error": "порт должен быть числом от 1 до 65535"}).to_string();
+    };
+    let Some(dir) = clients::data_dir() else {
+        return json!({"ok": false, "code": "NO_LOCALAPPDATA", "error": "не задана переменная LOCALAPPDATA"}).to_string();
+    };
+    match clients::write(&dir, port as u16) {
+        Ok(files) => json!({
+            "ok": true,
+            "headersHelper": files.headers_helper.display().to_string(),
+            "bridge": files.bridge.display().to_string(),
+        })
+        .to_string(),
+        Err(error) => json!({"ok": false, "code": "IO", "error": format!("{}: {error}", dir.display())}).to_string(),
     }
 }
 

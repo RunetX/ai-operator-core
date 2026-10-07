@@ -128,7 +128,7 @@ pub fn tools_list_result(id: &Value, tools: &Tools) -> String {
     )
 }
 
-/// Ответ инструмента: текст в одном элементе `content`, как раньше собирал client_mcp (`Мсп_Результаты.Текст`).
+/// Ответ инструмента: текст в одном элементе `content`.
 pub fn tool_text_result(id: &Value, text: &str) -> String {
     result(id, json!({"content": [{"type": "text", "text": text}]}))
 }

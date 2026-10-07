@@ -6,7 +6,7 @@ rem Использование: mcp-bridge.cmd [порт]   (по умолчан
 setlocal
 set "PORT=%~1"
 if "%PORT%"=="" set "PORT=9874"
-set "TOKEN_FILE=%LOCALAPPDATA%\WebTransport\mcp-token"
+set "TOKEN_FILE=%LOCALAPPDATA%\AiOperator\mcp-token"
 if not exist "%TOKEN_FILE%" (
 	echo MCP token file not found: %TOKEN_FILE% 1>&2
 	exit /b 1

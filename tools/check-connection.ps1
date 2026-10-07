@@ -4,7 +4,7 @@
 
 .DESCRIPTION
   Проверки по порядку:
-    1. файл токена %LOCALAPPDATA%\WebTransport\mcp-token;
+    1. файл токена %LOCALAPPDATA%\AiOperator\mcp-token;
     2. порт на 127.0.0.1 слушает 1С;
     3. запрос без токена получает 401;
     4. initialize с токеном;
@@ -122,7 +122,7 @@ function Stop-OnRpcError($Result, [string]$Method) {
 }
 
 # 1. Токен
-$tokenFile = Join-Path $env:LOCALAPPDATA 'WebTransport\mcp-token'
+$tokenFile = Join-Path $env:LOCALAPPDATA 'AiOperator\mcp-token'
 $token = if (Test-Path $tokenFile) { [IO.File]::ReadAllText($tokenFile).Trim() } else { '' }
 if (-not $token) {
 	Stop-Check "Нет токена: файл $tokenFile не найден или пуст" "выполнить ./tools/new-mcp-token.ps1, затем перезапустить ИИ-оператор в 1С"
@@ -130,7 +130,7 @@ if (-not $token) {
 Write-Ok "Токен есть: $tokenFile"
 if ($env:ONEC_MCP_TOKEN -and $env:ONEC_MCP_TOKEN.Trim() -cne $token) {
 	Write-Warn "Переменная ONEC_MCP_TOKEN в этом окне не совпадает с файлом токена: Claude Code, запущенный отсюда, получит 401" `
-		'$env:ONEC_MCP_TOKEN = (Get-Content "$env:LOCALAPPDATA\WebTransport\mcp-token" -Raw).Trim()'
+		'$env:ONEC_MCP_TOKEN = (Get-Content "$env:LOCALAPPDATA\AiOperator\mcp-token" -Raw).Trim()'
 }
 
 # 2. Порт
@@ -172,7 +172,7 @@ $anonymous = Invoke-Mcp 'initialize' $initialize -Token ''
 Stop-OnNoAnswer $anonymous
 if ($anonymous.Status -ge 200 -and $anonymous.Status -lt 300) {
 	Stop-Check "Сервер принимает запросы без токена" ("остановить сервер и запустить его командой ${startCommand}: она проверяет авторизацию при запуске. " +
-		"Если на порту работает client_mcp прежней установки, остановить его и удалить расширение client_mcp: ядру он больше не нужен")
+		"Если на порту работает другая программа, остановить её или задать ИИ-оператору другой порт")
 }
 if ($anonymous.Status -ne 401) {
 	Stop-Check "Без токена сервер ответил HTTP $($anonymous.Status), а ожидался 401" "проверить, что порт $Port принадлежит ИИ-оператору, и перезапустить его в 1С"

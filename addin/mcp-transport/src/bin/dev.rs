@@ -2,13 +2,14 @@
 //! (`fake`). На нём гоняются `tests/e2e/mcp_client.py`, `transport_probe.py` и клиенты MCP без 1С.
 //!
 //!     mcp-transport-dev [--port 9876] [--snapshot build/mcp-full-acc.json] [--timeout 900] [--keepalive 20]
+//!     mcp-transport-dev --port 9874 --client-files <каталог>   # только скрипты для клиентов
 //!
 //! С `--snapshot` сервер отдаёт instructions и инструменты из снимка: так проверяется, что компонента
 //! передаёт модели ровно то, что прислало ядро (`mcp_snapshot.py --compare`).
 
 use std::time::Duration;
 
-use ai_operator_mcp::{fake, server, token};
+use ai_operator_mcp::{clients, fake, server, token};
 use serde_json::{json, Value};
 
 fn main() {
@@ -24,6 +25,14 @@ fn main() {
             "--snapshot" => snapshot = Some(value()),
             "--timeout" => timeout = value().parse().unwrap_or_else(|_| usage("таймаут")),
             "--keepalive" => keepalive = value().parse().unwrap_or_else(|_| usage("keepalive")),
+            // Только записать скрипты для MCP-клиентов, как кнопки формы «Состояние ИИ-оператора», и выйти.
+            "--client-files" => {
+                let dir = value();
+                let files = clients::write(std::path::Path::new(&dir), port).unwrap_or_else(|error| usage(&error.to_string()));
+                println!("{}", files.headers_helper.display());
+                println!("{}", files.bridge.display());
+                return;
+            }
             _ => usage(&format!("неизвестный ключ {arg}")),
         }
     }
