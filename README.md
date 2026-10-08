@@ -8,13 +8,15 @@
 ![Платформа](https://img.shields.io/badge/1С-8.3.24%2B-yellow)
 ![Протокол](https://img.shields.io/badge/MCP-Streamable_HTTP-blue)
 
-<a href="https://infostart.ru/1c/articles/2800981/"><img src="docs/infostart.svg" alt="Инфостарт" height="28"></a>
+<a href="https://infostart.ru/1c/articles/2811615/"><img src="https://infostart.ru/bitrix/templates/sandbox_empty/assets/tpl/abo/img/logo.svg" alt="Инфостарт" height="28"></a>
 
 О проекте на Инфостарте: [ИИ-оператор для 1С: нейросеть проводит документы, но кнопку «Выполнить» нажимаете вы](https://infostart.ru/1c/articles/2800981/).
 
 Про надстройку для кадрового ЭДО: [ИИ-оператор управляет КЭДО](https://infostart.ru/1c/articles/2806328/), код — [RunetX/ai-operator-kedo](https://github.com/RunetX/ai-operator-kedo). Пакет для электронных транспортных накладных — [RunetX/ai-operator-epd](https://github.com/RunetX/ai-operator-epd).
 
 Про маскирование персональных данных в вопросе пользователя: [Из Иванова приехали две фуры: как прятать персональные данные в падежах и прозвищах](https://infostart.ru/1c/articles/2807944/).
+
+Про журнал операций, откат пакета и установку одной обработкой: [Кто распровёл квартал: журнал, откат и кнопка, которую жмёт человек](https://infostart.ru/1c/articles/2811615/).
 
 ---
 
