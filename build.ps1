@@ -18,10 +18,15 @@
   и тесты бота «ИИОператор_Бот_Тесты».
   ibcmd требует монопольного доступа: клиент 1С на этой базе должен быть закрыт.
 
+  Для своих сценариев сборки: -Project и -Extension загружают один каталог src\<Project> как расширение
+  с этим именем (например, пакет из другого репозитория с -Source), -PrepareOnly только готовит его к загрузке
+  в каталоге -Out и в базу не загружает.
+
 .EXAMPLE
   ./build.ps1 -InfoBase 'C:\Bases\Acc' -User 'Администратор'
   ./build.ps1 -InfoBase 'C:\Bases\Acc' -User 'Администратор' -Tests
   ./build.ps1 -InfoBase 'C:\Bases\Trade' -User 'Администратор' -Bot
+  ./build.ps1 -InfoBase 'C:\Bases\Zup' -User 'Администратор' -Source 'C:\ai-operator-kedo' -Project ai-operator-kedo -Extension ИИОператор_КЭДО
 #>
 param(
 	[Parameter(Mandatory)]
@@ -33,7 +38,18 @@ param(
 	[switch]$Bot,
 	# Версия платформы, например 8.3.27.2214. По умолчанию — самая новая 8.3: платформа 8.5 может
 	# перевести файловую базу в свой формат, её указывают только явно.
-	[string]$Platform = ''
+	[string]$Platform = '',
+	# Один проект вместо набора ядра: каталог src\<Project> загружается как расширение -Extension.
+	[string]$Project = '',
+	[string]$Extension = '',
+	# Каталог, в котором лежит src\. По умолчанию — каталог скрипта.
+	[string]$Source = '',
+	# Каталог подготовленных исходников проекта -Project. По умолчанию — build\<Project> рядом со скриптом.
+	[string]$Out = '',
+	# Каталог данных ibcmd (--data). По умолчанию — build\ibcmd-data рядом со скриптом; пустая строка — без него.
+	[string]$Data = '',
+	# Только подготовить исходники -Project к загрузке, в базу не загружать.
+	[switch]$PrepareOnly
 )
 
 $ErrorActionPreference = 'Stop'
@@ -47,12 +63,21 @@ function Find-PlatformFile([string]$Name) {
 	return $found[0].FullName
 }
 
+if ([bool]$Project -ne [bool]$Extension) { throw 'Проект задаётся вместе с именем расширения: -Project <каталог в src> -Extension <имя>.' }
+if ($PrepareOnly -and -not $Project) { throw '-PrepareOnly готовит один проект: укажите -Project и -Extension.' }
 $ibcmd = Find-PlatformFile 'ibcmd.exe'
 if (-not (Test-Path $ibcmd)) { throw "Не найден ibcmd: $ibcmd" }
 if (-not (Test-Path $InfoBase)) { throw "Не найден каталог базы: $InfoBase" }
+if (-not $Source) { $Source = $PSScriptRoot }
+# Полные пути без косой черты в конце: от них отсчитываются пути файлов, а методы .NET считают относительный
+# путь от своего текущего каталога, а не от текущего каталога PowerShell.
+$Source = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($Source).TrimEnd('\', '/')
+if ($Out) { $Out = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($Out).TrimEnd('\', '/') }
 
 $build = Join-Path $PSScriptRoot 'build'
-$common = @("--db-path=$InfoBase", "--data=$(Join-Path $build 'ibcmd-data')")
+$common = @("--db-path=$InfoBase")
+if (-not $PSBoundParameters.ContainsKey('Data')) { $Data = Join-Path $build 'ibcmd-data' }
+if ($Data) { $common += "--data=$Data" }
 if ($User) { $common += "--user=$User" }
 $common += "--password=$Password"
 
@@ -94,42 +119,40 @@ function Get-AdoptedIds([string]$Out) {
 	}
 	$objects = Join-Path $build "config-objects\$([guid]::NewGuid().ToString('N').Substring(0, 8))"
 	Write-Host ">> идентификаторы заимствованных объектов: $($names -join ', ')"
-	# Вывод ibcmd — на экран: иначе он попал бы в результат функции.
-	Invoke-Ibcmd (@('config', 'export', 'objects', "--out=$objects") + $names) | Out-Host
-	foreach ($file in $adopted) {
-		$main = Join-Path $objects "$($file.Directory.Name)\$($file.Name)"
-		if (-not (Test-Path $main)) { throw "В конфигурации базы нет объекта $($file.Directory.Name)\$($file.BaseName)" }
-		$id = [regex]::Match([IO.File]::ReadAllText($main), '<\w+ uuid="([0-9a-f-]{36})"').Groups[1].Value
-		if (-not $id) { throw "Не найден идентификатор объекта в $main" }
-		$ids[$file.FullName] = $id
+	try {
+		# Вывод ibcmd — на экран: иначе он попал бы в результат функции.
+		Invoke-Ibcmd (@('config', 'export', 'objects', "--out=$objects") + $names) | Out-Host
+		foreach ($file in $adopted) {
+			$main = Join-Path $objects "$($file.Directory.Name)\$($file.Name)"
+			if (-not (Test-Path $main)) { throw "В конфигурации базы нет объекта $($file.Directory.Name)\$($file.BaseName)" }
+			$id = [regex]::Match([IO.File]::ReadAllText($main), '<\w+ uuid="([0-9a-f-]{36})"').Groups[1].Value
+			if (-not $id) { throw "Не найден идентификатор объекта в $main" }
+			$ids[$file.FullName] = $id
+		}
+	} finally {
+		if (Test-Path $objects) { [IO.Directory]::Delete($objects, $true) }
 	}
 	return $ids
 }
 
-$projects = [ordered]@{ 'ai-operator' = 'ИИОператор' }
-if ($Tests) { $projects['ai-operator-tests'] = 'ИИОператор_Тесты' }
-if ($Bot) { $projects['ai-operator-bot'] = 'ИИОператор_Бот' }
-if ($Bot -and $Tests) { $projects['ai-operator-bot-tests'] = 'ИИОператор_Бот_Тесты' }
-
-foreach ($project in $projects.GetEnumerator()) {
-	$src = Join-Path $PSScriptRoot "src\$($project.Key)"
-	$out = Join-Path $build $project.Key
-	$extension = $project.Value
-
-	if (Test-Path $out) { [IO.Directory]::Delete($out, $true) }
-	New-Item -ItemType Directory -Force $out | Out-Null
+# Копия src\<Project> в формате выгрузки конфигуратора с идентификаторами заимствованных объектов этой базы.
+function Initialize-Project([string]$Name, [string]$Target) {
+	$src = Join-Path $Source "src\$Name"
+	if (-not (Test-Path $src)) { throw "Не найдены исходники: $src" }
+	if (Test-Path $Target) { [IO.Directory]::Delete($Target, $true) }
+	New-Item -ItemType Directory -Force $Target | Out-Null
 	Get-ChildItem $src -Recurse -File | ForEach-Object {
-		$target = Join-Path $out $_.FullName.Substring($src.Length + 1)
-		New-Item -ItemType Directory -Force (Split-Path $target) | Out-Null
+		$file = Join-Path $Target $_.FullName.Substring($src.Length + 1)
+		New-Item -ItemType Directory -Force (Split-Path $file) | Out-Null
 		if ($_.Extension -in '.xml', '.bsl', '.txt') {
 			$text = [IO.File]::ReadAllText($_.FullName) -replace "`r`n", "`n" -replace "`n", "`r`n"
-			[IO.File]::WriteAllText($target, $text, $utf8Bom)
+			[IO.File]::WriteAllText($file, $text, $utf8Bom)
 		} else {
-			Copy-Item $_.FullName $target
+			Copy-Item $_.FullName $file
 		}
 	}
 
-	$ids = Get-AdoptedIds $out
+	$ids = Get-AdoptedIds $Target
 	foreach ($item in $ids.GetEnumerator()) {
 		$text = [IO.File]::ReadAllText($item.Key)
 		$text = [regex]::Replace($text, '<ExtendedConfigurationObject>[^<]*</ExtendedConfigurationObject>',
@@ -137,7 +160,7 @@ foreach ($project in $projects.GetEnumerator()) {
 		[IO.File]::WriteAllText($item.Key, $text, $utf8Bom)
 	}
 
-	$configPath = Join-Path $out 'Configuration.xml'
+	$configPath = Join-Path $Target 'Configuration.xml'
 	$config = [IO.File]::ReadAllText($configPath)
 	$config = [regex]::Replace($config, '(?s)(<ChildObjects>\r\n)(.*?)(\r\n\t\t</ChildObjects>)', {
 		param($m)
@@ -146,9 +169,24 @@ foreach ($project in $projects.GetEnumerator()) {
 		$m.Groups[1].Value + ($sorted -join "`r`n") + $m.Groups[3].Value
 	})
 	[IO.File]::WriteAllText($configPath, $config, $utf8Bom)
+}
 
-	Write-Host ">> $extension -> $InfoBase"
-	Invoke-Ibcmd @('config', 'import', "--extension=$extension", $out)
-	Install-Extension $extension
+if ($Project) {
+	$projects = [ordered]@{ $Project = $Extension }
+} else {
+	$projects = [ordered]@{ 'ai-operator' = 'ИИОператор' }
+	if ($Tests) { $projects['ai-operator-tests'] = 'ИИОператор_Тесты' }
+	if ($Bot) { $projects['ai-operator-bot'] = 'ИИОператор_Бот' }
+	if ($Bot -and $Tests) { $projects['ai-operator-bot-tests'] = 'ИИОператор_Бот_Тесты' }
+}
+
+# Переменная цикла не $project: имена переменных без учёта регистра, а $Project - строковый параметр.
+foreach ($item in $projects.GetEnumerator()) {
+	$target = if ($Project -and $Out) { $Out } else { Join-Path $build $item.Key }
+	Initialize-Project $item.Key $target
+	if ($PrepareOnly) { continue }
+	Write-Host ">> $($item.Value) -> $InfoBase"
+	Invoke-Ibcmd @('config', 'import', "--extension=$($item.Value)", $target)
+	Install-Extension $item.Value
 }
 Write-Host 'Готово.'

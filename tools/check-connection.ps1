@@ -10,7 +10,8 @@
     4. initialize с токеном;
     5. tools/list: число инструментов, среди них ping;
     6. ping: версия расширения, конфигурация, платформа.
-  Скрипт останавливается на первом провале и называет следующий шаг из «Если не работает» в docs/clients.md.
+  Скрипт останавливается на первом провале и называет следующий шаг из «Если не работает» в docs/clients.md
+  репозитория ядра ai-operator-core.
   Токен на экран не выводится. Скрипт ничего не меняет; вызов ping попадает в журнал регистрации 1С,
   как любой вызов инструмента.
   Работает в Windows PowerShell 5.1 и PowerShell 7. Файл сохранён в UTF-8 с BOM: без BOM
@@ -29,6 +30,9 @@ $ErrorActionPreference = 'Stop'
 $ProtocolVersion = '2025-06-18'
 $url = "http://127.0.0.1:$Port/mcp"
 $startCommand = '«ИИ-оператор → Запустить ИИ-оператор»'
+# Руководство по клиентам: в репозитории ядра лежит в docs, в рабочем репозитории разработки — в publish.
+$clientsDoc = @('docs/clients.md', 'publish/ai-operator-core/docs/clients.md') |
+	Where-Object { Test-Path (Join-Path (Split-Path -Parent $PSScriptRoot) $_) } | Select-Object -First 1
 
 function Write-Ok([string]$Text) {
 	Write-Host "[ OK ] $Text" -ForegroundColor Green
@@ -125,12 +129,14 @@ function Stop-OnRpcError($Result, [string]$Method) {
 $tokenFile = Join-Path $env:LOCALAPPDATA 'AiOperator\mcp-token'
 $token = if (Test-Path $tokenFile) { [IO.File]::ReadAllText($tokenFile).Trim() } else { '' }
 if (-not $token) {
-	Stop-Check "Нет токена: файл $tokenFile не найден или пуст" "выполнить ./tools/new-mcp-token.ps1, затем перезапустить ИИ-оператор в 1С"
+	Stop-Check "Нет токена: файл $tokenFile не найден или пуст" "в 1С открыть «ИИ-оператор → Состояние ИИ-оператора», в строке «Токен доступа» нажать «Создать токен», затем запустить ИИ-оператор"
 }
 Write-Ok "Токен есть: $tokenFile"
-if ($env:ONEC_MCP_TOKEN -and $env:ONEC_MCP_TOKEN.Trim() -cne $token) {
-	Write-Warn "Переменная ONEC_MCP_TOKEN в этом окне не совпадает с файлом токена: Claude Code, запущенный отсюда, получит 401" `
-		'$env:ONEC_MCP_TOKEN = (Get-Content "$env:LOCALAPPDATA\AiOperator\mcp-token" -Raw).Trim()'
+# Компонента читает ту же переменную раньше файла: 1С, запущенная из окна с ней, работает с токеном из переменной.
+$envToken = if ($env:AI_OPERATOR_MCP_TOKEN) { $env:AI_OPERATOR_MCP_TOKEN.Trim() } else { '' }
+if ($envToken -and $envToken -cne $token) {
+	Write-Warn "Переменная AI_OPERATOR_MCP_TOKEN в этом окне не совпадает с файлом токена: Claude Code, запущенный отсюда, получит 401, а 1С, запущенная отсюда, возьмёт токен из переменной" `
+		'$env:AI_OPERATOR_MCP_TOKEN = (Get-Content "$env:LOCALAPPDATA\AiOperator\mcp-token" -Raw).Trim()'
 }
 
 # 2. Порт
@@ -184,8 +190,13 @@ $script:SessionId = $null
 $init = Invoke-Mcp 'initialize' $initialize -Token $token
 Stop-OnNoAnswer $init
 if ($init.Status -eq 401) {
+	if ($envToken -and $envToken -cne $token -and (Invoke-Mcp 'initialize' $initialize -Token $envToken).Status -eq 200) {
+		Stop-Check 'Сервер работает с токеном из переменной AI_OPERATOR_MCP_TOKEN, а не из файла: 1С запущена из окна, где задана эта переменная' `
+			'закрыть 1С и запустить её не из этого окна, например из меню «Пуск», затем запустить ИИ-оператор'
+	}
 	Stop-Check 'Сервер не принял токен из файла' ("токен перевыпустили, а сервер работает со старым: остановить и снова запустить ИИ-оператор в 1С, " +
-		"затем перезапустить MCP-клиент")
+		"затем перезапустить MCP-клиент. Если 401 остаётся, 1С запущена из окна PowerShell с переменной AI_OPERATOR_MCP_TOKEN " +
+		"и берёт токен из неё (источник токена показывает форма «Состояние ИИ-оператора»): закрыть 1С и запустить её не из этого окна")
 }
 Stop-OnRpcError $init 'initialize'
 $server = $init.Message.result.serverInfo
@@ -220,5 +231,5 @@ if ($seconds -ge 2) {
 }
 
 Write-Host ''
-Write-Host "Подключение работает. Адрес для MCP-клиента: $url, настройка клиентов — docs/clients.md"
+Write-Host "Подключение работает. Адрес для MCP-клиента: $url$(if ($clientsDoc) { ", настройка клиентов — $clientsDoc" })"
 exit 0

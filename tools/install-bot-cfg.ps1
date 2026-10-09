@@ -15,7 +15,8 @@
 
   Нужны платформа 8.3.25 или новее и конфигурация, которую можно менять: снятая с поддержки или на поддержке
   с разрешёнными изменениями. Добавление бота требует монопольного доступа: закройте все сеансы базы,
-  у серверной базы заблокируйте начало сеансов в консоли кластера.
+  у серверной базы заблокируйте начало сеансов в консоли кластера. Если блокировка задана с кодом разрешения,
+  передайте его в -UnlockCode: конфигуратор войдёт в базу с этим кодом.
 
   -Check только проверяет, на месте ли патч.
 
@@ -32,6 +33,8 @@ param(
 	[string]$User = '',
 	[string]$Password = '',
 	[switch]$Check,
+	# Код разрешения блокировки начала сеансов серверной базы.
+	[string]$UnlockCode = '',
 	# Версия платформы, например 8.3.27.2214. По умолчанию — самая новая 8.3: платформа 8.5 может
 	# перевести файловую базу в свой формат, её указывают только явно.
 	[string]$Platform = ''
@@ -63,6 +66,7 @@ function Invoke-Designer([string]$Name, [string[]]$Arguments) {
 	$common = @('DESIGNER', $baseArg)
 	if ($User) { $common += "/N`"$User`"" }
 	$common += @("/P`"$Password`"", '/DisableStartupDialogs', '/DisableStartupMessages', "/Out`"$log`"")
+	if ($UnlockCode) { $common += "/UC$UnlockCode" }
 	$process = Start-Process $designer -Wait -PassThru -ArgumentList ($common + $Arguments)
 	Get-Content $log -Encoding UTF8 -ErrorAction SilentlyContinue | Where-Object { $_ } | ForEach-Object { "  $_" }
 	if ($process.ExitCode -ne 0) { throw "Конфигуратор ($Name) завершился с кодом $($process.ExitCode), см. $log" }

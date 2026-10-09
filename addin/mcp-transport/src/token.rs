@@ -1,8 +1,8 @@
 //! Токен доступа к серверу MCP.
 //!
 //! Источники по порядку: переменная `AI_OPERATOR_MCP_TOKEN`, файл из `AI_OPERATOR_MCP_TOKEN_FILE`,
-//! файл `%LOCALAPPDATA%\AiOperator\mcp-token` (его выпускает форма «Состояние ИИ-оператора» или
-//! `tools/new-mcp-token.ps1`). Там же лежат скрипты для MCP-клиентов и лог компоненты.
+//! файл `%LOCALAPPDATA%\AiOperator\mcp-token` (его выпускает форма «Состояние ИИ-оператора», кнопка
+//! «Создать токен»). Там же лежат скрипты для MCP-клиентов и лог компоненты.
 
 use std::path::PathBuf;
 
@@ -125,7 +125,7 @@ pub enum CreateError {
     Io(String),
 }
 
-/// Создаёт новый токен в файле: 32 случайных байта ОС в base64url, как `tools/new-mcp-token.ps1`.
+/// Создаёт новый токен в файле: 32 случайных байта ОС в base64url.
 pub fn create(path: &std::path::Path, overwrite: bool) -> Result<(), CreateError> {
     if path.exists() && !overwrite {
         return Err(CreateError::Exists);
@@ -196,15 +196,6 @@ mod tests {
         let (token, source) = load_from(None, None, Some(file)).unwrap();
         assert_eq!(token, "bom-token-0123456789");
         assert_eq!(source, Source::DefaultFile);
-    }
-
-    #[test]
-    fn base64url_matches_powershell_variant() {
-        // [Convert]::ToBase64String без «=», «+» → «-», «/» → «_».
-        assert_eq!(base64url(&[0xfb, 0xff, 0xfe]), "-__-");
-        assert_eq!(base64url(b"ab"), "YWI");
-        assert_eq!(base64url(b"a"), "YQ");
-        assert_eq!(base64url(&[0u8; 32]).len(), 43);
     }
 
     #[test]

@@ -199,7 +199,6 @@ Rust, средства сборки, отдельные расширения и 
 - У каждой учётной записи Windows свой токен, другие пользователи компьютера его не прочитают.
 - Без токена сервер не запускается.
 - Перевыпуск — та же строка: форма спросит, заменить ли токен. После него перезапустите ИИ-оператор в 1С; MCP-клиенты читают токен из файла сами.
-- Можно и скриптом из репозитория: `./tools/new-mcp-token.ps1` (`-Force` — перевыпуск). В Windows PowerShell 5.1 запускайте его так: `powershell -ExecutionPolicy Bypass -File .\tools\new-mcp-token.ps1`.
 
 Вместо файла токен можно передать переменной окружения `AI_OPERATOR_MCP_TOKEN`, а путь к другому файлу — переменной `AI_OPERATOR_MCP_TOKEN_FILE`. Сервер ищет токен в таком порядке: переменная с токеном, переменная с путём к файлу, файл по умолчанию.
 
@@ -212,7 +211,7 @@ Rust, средства сборки, отдельные расширения и 
 
 **MCP-клиент.** Кнопки формы «Состояние ИИ-оператора»:
 - «Настройки для Claude Code» — готовый `.mcp.json`. Заголовок авторизации печатает скрипт `%LOCALAPPDATA%\AiOperator\mcp-headers.cmd` (параметр `headersHelper` Claude Code), он читает токен из файла;
-- «Настройки для Claude Desktop и LM Studio» — запись для `claude_desktop_config.json` или `mcp.json` с мостом `%LOCALAPPDATA%\AiOperator\mcp-bridge.cmd` (`npx mcp-remote`).
+- «Настройки для Claude Desktop и LM Studio» — запись для `claude_desktop_config.json` или `mcp.json` с мостом `%LOCALAPPDATA%\AiOperator\mcp-bridge-<порт>.cmd` (`npx mcp-remote`, у каждой базы свой).
 
 Токена в этих настройках нет. Подробнее о клиентах — [clients.md](clients.md).
 

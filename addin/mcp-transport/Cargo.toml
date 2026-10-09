@@ -10,9 +10,19 @@ publish = false
 name = "ai_operator_mcp"
 crate-type = ["cdylib", "rlib"]
 
+# Подставная 1С (src/fake.rs) нужна только отладочному серверу и тестам по HTTP: в DLL её нет.
+[features]
+dev = []
+
 [[bin]]
 name = "mcp-transport-dev"
 path = "src/bin/dev.rs"
+required-features = ["dev"]
+
+[[test]]
+name = "http"
+path = "tests/http.rs"
+required-features = ["dev"]
 
 [dependencies]
 addin1c = "=0.7.0"

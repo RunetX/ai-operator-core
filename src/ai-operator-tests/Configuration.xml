@@ -71,6 +71,7 @@
 			<CommonModule>ОМ_ИИО_МаскированиеВводаСервер</CommonModule>
 			<CommonModule>ОМ_ИИО_ПоказКлиент</CommonModule>
 			<CommonModule>ОМ_ИИО_ЗапускКлиент</CommonModule>
+			<CommonModule>ОМ_ИИО_ФоновыеЗаданияСервер</CommonModule>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>

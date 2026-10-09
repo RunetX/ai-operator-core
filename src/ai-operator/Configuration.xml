@@ -50,7 +50,7 @@
 				<xr:Item xsi:type="xr:MDObjectRef">Role.ИИО_ПолныеПрава</xr:Item>
 			</DefaultRoles>
 			<Vendor>RunetX</Vendor>
-			<Version>0.1.15.1</Version>
+			<Version>0.1.16.0</Version>
 			<BriefInformation>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -103,7 +103,6 @@
 			<CommonModule>ИИО_ИнструментыБота</CommonModule>
 			<CommonModule>ИИО_ИнструментыКлиент</CommonModule>
 			<CommonModule>ИИО_МетаданныеКлиентСервер</CommonModule>
-			<CommonModule>ИИО_МетаданныеВызовСервера</CommonModule>
 			<CommonModule>ИИО_Метаданные</CommonModule>
 			<CommonTemplate>ИИО_ПреднастройкаМаскирования</CommonTemplate>
 			<CommonTemplate>ИИО_ИменаЛюдей</CommonTemplate>
@@ -121,18 +120,18 @@
 			<CommonModule>ИИО_Запросы</CommonModule>
 			<CommonModule>ИИО_ЗапросыКлиент</CommonModule>
 			<CommonModule>ИИО_Поиск</CommonModule>
-			<CommonModule>ИИО_ПоискВызовСервера</CommonModule>
+			<CommonModule>ИИО_Показ</CommonModule>
 			<CommonModule>ИИО_ПоказВызовСервера</CommonModule>
 			<CommonModule>ИИО_ПоказКлиент</CommonModule>
 			<CommonModule>ИИО_Печать</CommonModule>
 			<CommonModule>ИИО_ПечатьВызовСервера</CommonModule>
 			<CommonModule>ИИО_Связи</CommonModule>
-			<CommonModule>ИИО_СвязиВызовСервера</CommonModule>
 			<CommonModule>ИИО_РазборОшибок</CommonModule>
 			<CommonModule>ИИО_РазборОшибокВызовСервера</CommonModule>
 			<CommonModule>ИИО_ФоновыеЗадания</CommonModule>
 			<CommonModule>ИИО_ФоновыеЗаданияВызовСервера</CommonModule>
 			<CommonModule>ИИО_ФоновыеЗаданияКлиент</CommonModule>
+			<CommonModule>ИИО_ФоновыеЗаданияКлиентСервер</CommonModule>
 			<CommonTemplate>ИИО_КаталогОтчетов</CommonTemplate>
 			<CommonPicture>ИИО_Логотип</CommonPicture>
 			<CommonModule>ИИО_ОтчетыПовтИсп</CommonModule>

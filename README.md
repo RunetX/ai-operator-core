@@ -309,9 +309,9 @@ cd ai-operator-core
 
 ## Подключение MCP-клиентов
 
-Во всех способах токен читается из файла пользователя и не хранится в конфигурации клиента.
+Токен не хранится в конфигурации клиента: его подставляет скрипт из файла пользователя. Готовые настройки для своего компьютера дают кнопки формы «ИИ-оператор → Состояние ИИ-оператора»: «Настройки для Claude Code» и «Настройки для Claude Desktop и LM Studio». Форма пишет скрипты в `%LOCALAPPDATA%\AiOperator`.
 
-**Claude Code** — файл `.mcp.json` в каталоге проекта. Переменная раскрывается при запуске:
+**Claude Code** — файл `.mcp.json` в каталоге проекта. Заголовок авторизации печатает скрипт `mcp-headers.cmd`:
 
 ```json
 {
@@ -319,25 +319,20 @@ cd ai-operator-core
     "onec": {
       "type": "http",
       "url": "http://127.0.0.1:9874/mcp",
-      "headers": { "Authorization": "Bearer ${ONEC_MCP_TOKEN}" }
+      "headersHelper": "C:\\Users\\<пользователь>\\AppData\\Local\\AiOperator\\mcp-headers.cmd"
     }
   }
 }
 ```
 
-```powershell
-$env:ONEC_MCP_TOKEN = (Get-Content "$env:LOCALAPPDATA\AiOperator\mcp-token" -Raw).Trim()
-claude
-```
-
-**Claude Desktop** и **LM Studio** подключаются через stdio-мост [`tools/mcp-bridge.cmd`](tools/mcp-bridge.cmd). Мост читает токен из файла и запускает `mcp-remote`:
+**Claude Desktop** и **LM Studio** подключаются через stdio-мост `mcp-bridge-<порт>.cmd`. Мост читает токен из файла и запускает `mcp-remote`:
 
 ```json
 {
   "mcpServers": {
     "onec": {
-      "command": "cmd",
-      "args": ["/c", "C:\\path\\to\\ai-operator-core\\tools\\mcp-bridge.cmd", "9874"]
+      "command": "C:\\Users\\<пользователь>\\AppData\\Local\\AiOperator\\mcp-bridge-9874.cmd",
+      "args": []
     }
   }
 }

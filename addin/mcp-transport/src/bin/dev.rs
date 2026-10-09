@@ -1,5 +1,5 @@
 //! Отладочный сервер: та же библиотека, что в компоненте, но вместо 1С — подставные обработчики
-//! (`fake`). На нём гоняются `tests/e2e/mcp_client.py`, `transport_probe.py` и клиенты MCP без 1С.
+//! (`fake`). На нём гоняются `tests/e2e/mcp_client.py` и клиенты MCP без 1С.
 //!
 //!     mcp-transport-dev [--port 9876] [--snapshot build/mcp-full-acc.json] [--timeout 900] [--keepalive 20]
 //!     mcp-transport-dev --port 9874 --client-files <каталог>   # только скрипты для клиентов

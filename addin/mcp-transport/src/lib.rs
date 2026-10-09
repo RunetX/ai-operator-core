@@ -7,6 +7,8 @@
 //! Код написан с нуля по спецификации MCP (modelcontextprotocol.io) и документации Native API.
 
 pub mod clients;
+/// Подставная 1С для `mcp-transport-dev` и тестов: только с признаком `dev`, в компоненту не входит.
+#[cfg(feature = "dev")]
 pub mod fake;
 pub mod ffi;
 pub mod log;

@@ -1,8 +1,9 @@
 //! Файлы для MCP-клиентов в `%LOCALAPPDATA%\AiOperator`: токен в их настройки не попадает.
 //!
 //! - `mcp-headers.cmd` — для `headersHelper` Claude Code: печатает заголовок авторизации из файла токена;
-//! - `mcp-bridge.cmd` — stdio-мост `npx mcp-remote` для Claude Desktop и LM Studio (у Claude Desktop
-//!   `headersHelper` для HTTP-серверов не работает).
+//! - `mcp-bridge-<порт>.cmd` — stdio-мост `npx mcp-remote` для Claude Desktop и LM Studio (у Claude Desktop
+//!   `headersHelper` для HTTP-серверов не работает). Порт в имени: у каждой базы свой порт MCP, и мост одной
+//!   базы не переписывает мост другой.
 //!
 //! Оба читают токен при каждом запуске, поэтому после «Создать токен» настройки клиентов менять не нужно.
 
@@ -34,7 +35,8 @@ pub struct ClientFiles {
 /// Пишет оба скрипта для порта `port` и возвращает их пути.
 pub fn write(dir: &Path, port: u16) -> std::io::Result<ClientFiles> {
     std::fs::create_dir_all(dir)?;
-    let files = ClientFiles { headers_helper: dir.join("mcp-headers.cmd"), bridge: dir.join("mcp-bridge.cmd") };
+    let files =
+        ClientFiles { headers_helper: dir.join("mcp-headers.cmd"), bridge: dir.join(format!("mcp-bridge-{port}.cmd")) };
     std::fs::write(&files.headers_helper, crlf(&headers_script()))?;
     std::fs::write(&files.bridge, crlf(&bridge_script(port)))?;
     Ok(files)
@@ -107,6 +109,7 @@ mod tests {
         let files = write(&dir, 9890).unwrap();
         let headers = std::fs::read_to_string(&files.headers_helper).unwrap();
         let bridge = std::fs::read_to_string(&files.bridge).unwrap();
+        assert_eq!(files.bridge.file_name().unwrap(), "mcp-bridge-9890.cmd");
         assert!(headers.contains(r#"echo {"Authorization": "Bearer %TOKEN%"}"#));
         assert!(bridge.contains("http://127.0.0.1:9890/mcp"));
         assert!(bridge.contains(r#"--header "Authorization:${AUTH_HEADER}""#));

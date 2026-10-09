@@ -329,6 +329,7 @@
 									<DataPath>Правила.ВидПДн</DataPath>
 									<Width>12</Width>
 									<DropListButton>true</DropListButton>
+									<ListChoiceMode>true</ListChoiceMode>
 									<ContextMenu name="ПравилаВидПДнКонтекстноеМеню" id="28"/>
 									<ExtendedTooltip name="ПравилаВидПДнРасширеннаяПодсказка" id="29"/>
 								</InputField>
