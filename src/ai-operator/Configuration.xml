@@ -50,7 +50,7 @@
 				<xr:Item xsi:type="xr:MDObjectRef">Role.ИИО_ПолныеПрава</xr:Item>
 			</DefaultRoles>
 			<Vendor>RunetX</Vendor>
-			<Version>0.1.16.0</Version>
+			<Version>0.1.17.0</Version>
 			<BriefInformation>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -138,6 +138,7 @@
 			<CommonModule>ИИО_Отчеты</CommonModule>
 			<CommonModule>ИИО_ОтчетыВызовСервера</CommonModule>
 			<CommonModule>ИИО_ОтчетыКлиент</CommonModule>
+			<CommonModule>ИИО_Файлы</CommonModule>
 			<Subsystem>ИИО_ИИОператор</Subsystem>
 			<Role>ИИО_ПользовательИИОператора</Role>
 			<Role>ИИО_АдминистраторИИОператора</Role>

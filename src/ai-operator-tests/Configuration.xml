@@ -72,6 +72,7 @@
 			<CommonModule>ОМ_ИИО_ПоказКлиент</CommonModule>
 			<CommonModule>ОМ_ИИО_ЗапускКлиент</CommonModule>
 			<CommonModule>ОМ_ИИО_ФоновыеЗаданияСервер</CommonModule>
+			<CommonModule>ОМ_ИИО_ФайлыСервер</CommonModule>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>
