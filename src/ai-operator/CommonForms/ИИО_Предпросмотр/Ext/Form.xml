@@ -13,7 +13,6 @@
 		<ChildItems>
 			<Button name="ФормаВыполнитьДействие" id="40">
 				<Type>CommandBarButton</Type>
-				<DefaultButton>true</DefaultButton>
 				<CommandName>Form.Command.ВыполнитьДействие</CommandName>
 				<ExtendedTooltip name="ФормаВыполнитьДействиеРасширеннаяПодсказка" id="41"/>
 			</Button>

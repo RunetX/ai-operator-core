@@ -208,6 +208,12 @@ fn foreign_origin_and_host_are_rejected() {
     let stand = Stand::new();
     assert_eq!(stand.post(&initialize("2025-06-18"), &[("Origin", "https://evil.example")]).status, 403);
     assert_eq!(stand.post(&initialize("2025-06-18"), &[("Host", "evil.example:9874")]).status, 403);
+    // Двойники localhost для DNS rebinding и Origin «null» (песочница iframe, file://) - тоже чужие.
+    for host in ["localhost.evil.example", "127.0.0.1.nip.io"] {
+        let host = format!("{host}:{}", stand.port());
+        assert_eq!(stand.post(&initialize("2025-06-18"), &[("Host", host.as_str())]).status, 403, "{host}");
+    }
+    assert_eq!(stand.post(&initialize("2025-06-18"), &[("Origin", "null")]).status, 403);
     assert_eq!(stand.post(&initialize("2025-06-18"), &[("Origin", "http://localhost:3000")]).status, 200);
     let allowed = Stand::with(|options| options.origins = vec!["https://app.example".into()]);
     assert_eq!(allowed.post(&initialize("2025-06-18"), &[("Origin", "https://app.example")]).status, 200);
